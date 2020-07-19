@@ -144,7 +144,9 @@ public class LoginFrame extends javax.swing.JFrame {
         PassTextB.setText("Password");
         jPanel1.add(PassTextB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 160, 60));
 
+        BotonLogin.setBackground(new java.awt.Color(51, 51, 51));
         BotonLogin.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        BotonLogin.setForeground(new java.awt.Color(255, 255, 255));
         BotonLogin.setText("Login");
         BotonLogin.setFocusPainted(false);
         BotonLogin.addActionListener(new java.awt.event.ActionListener() {

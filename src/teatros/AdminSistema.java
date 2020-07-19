@@ -33,6 +33,7 @@ public class AdminSistema extends javax.swing.JFrame {
 
         Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         IncTeatroB = new javax.swing.JButton();
         IncAdminB = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
@@ -54,6 +55,12 @@ public class AdminSistema extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Administrar Sistema");
         Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, -1));
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Administrar Sistema");
+        Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, 70));
 
         IncTeatroB.setBackground(new java.awt.Color(51, 51, 51));
         IncTeatroB.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
@@ -138,5 +145,6 @@ public class AdminSistema extends javax.swing.JFrame {
     private javax.swing.JButton IncTeatroB;
     private javax.swing.JPanel Panel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
