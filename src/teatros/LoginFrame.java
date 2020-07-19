@@ -124,7 +124,9 @@ public class LoginFrame extends javax.swing.JFrame {
         
         if(!state){
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta", "Advertencia",0);
-
+        }else{
+            new Principal();
+            this.dispose();
         }
         
     }//GEN-LAST:event_BotonLoginActionPerformed
