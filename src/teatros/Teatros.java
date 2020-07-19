@@ -13,6 +13,11 @@ import java.sql.SQLException;
 
 /**
  *
+ * Eje users:
+ * AdminSis: aconejo, Con4Use
+ * AdminTeatro aperez, ova4Che
+ * Agente jramos, Efacha2
+ * 
  * @author Admin
  */
 public class Teatros {
@@ -26,7 +31,7 @@ public class Teatros {
         new LoginFrame();
     }
     
-    public static boolean Login(String user, String pass){
+    public static String Login(String user, String pass){
         try {
           String connectionUrl = "jdbc:sqlserver://;database=TEATROS;";
           Connection c = DriverManager.getConnection(connectionUrl, user, pass);
@@ -38,15 +43,18 @@ public class Teatros {
         catch (SQLException ex) 
         {
             System.err.println(ex.toString());
-            return false;
+            return null;
 
         }
-        getTipo(user);
+        String tipo = getTipo(user);
+        Tipo = tipo;
+        
         System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo);
-        return true;
+        return tipo;
     }
     
-    private static void getTipo(String user){
+    private static String getTipo(String user){
+        String tipo = null;
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPStipoLogin ?");
             ct.setString(1, user);
@@ -54,11 +62,12 @@ public class Teatros {
             
             if(rs.next()){
                 System.out.println(rs.getString(1));
-                Tipo = rs.getString(1);
+                tipo = rs.getString(1);
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
+        return tipo;
     }
     
 }
