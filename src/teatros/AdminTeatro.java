@@ -32,6 +32,7 @@ public class AdminTeatro extends javax.swing.JFrame {
         Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        IncTeatroB1 = new javax.swing.JButton();
         IncTeatroB = new javax.swing.JButton();
         IncAdminB = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
@@ -59,23 +60,32 @@ public class AdminTeatro extends javax.swing.JFrame {
         jLabel2.setText("Administrar Teatro");
         Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, 70));
 
+        IncTeatroB1.setBackground(new java.awt.Color(51, 51, 51));
+        IncTeatroB1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        IncTeatroB1.setForeground(new java.awt.Color(255, 255, 255));
+        IncTeatroB1.setText("Incluir Agente");
+        IncTeatroB1.setToolTipText("Incluir un nuevo agente para el teatro");
+        IncTeatroB1.setFocusPainted(false);
+        IncTeatroB1.setPreferredSize(new java.awt.Dimension(280, 93));
+        Panel.add(IncTeatroB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 390, 140));
+
         IncTeatroB.setBackground(new java.awt.Color(51, 51, 51));
-        IncTeatroB.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        IncTeatroB.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         IncTeatroB.setForeground(new java.awt.Color(255, 255, 255));
-        IncTeatroB.setText("Incluir Teatro");
+        IncTeatroB.setText("Administrar Producción");
         IncTeatroB.setToolTipText("Incluir un nuevo teatro");
         IncTeatroB.setFocusPainted(false);
         IncTeatroB.setPreferredSize(new java.awt.Dimension(280, 93));
-        Panel.add(IncTeatroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 390, 140));
+        Panel.add(IncTeatroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 390, 140));
 
         IncAdminB.setBackground(new java.awt.Color(51, 51, 51));
         IncAdminB.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         IncAdminB.setForeground(new java.awt.Color(255, 255, 255));
-        IncAdminB.setText("Incluir Administrador");
-        IncAdminB.setToolTipText("Incluir un nuevo administrador para un teatro");
+        IncAdminB.setText("Agregar Producción");
+        IncAdminB.setToolTipText("Agregar una nueva producción para el teatro");
         IncAdminB.setFocusPainted(false);
         IncAdminB.setPreferredSize(new java.awt.Dimension(280, 93));
-        Panel.add(IncAdminB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 390, 140));
+        Panel.add(IncAdminB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 390, 140));
 
         Cerrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Cerrar.setText("Cerrar Sesión");
@@ -139,6 +149,7 @@ public class AdminTeatro extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton IncAdminB;
     private javax.swing.JButton IncTeatroB;
+    private javax.swing.JButton IncTeatroB1;
     private javax.swing.JPanel Panel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
