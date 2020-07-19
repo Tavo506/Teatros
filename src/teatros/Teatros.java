@@ -7,6 +7,8 @@ package teatros;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -15,6 +17,7 @@ import java.sql.SQLException;
  */
 public class Teatros {
     public static Connection con;
+    public static String User, Password, Tipo;
 
     /**
      * @param args the command line arguments
@@ -29,6 +32,8 @@ public class Teatros {
           Connection c = DriverManager.getConnection(connectionUrl, user, pass);
           con = c;
           System.out.println("Conectado.");
+          User = user;
+          Password = pass;
         } 
         catch (SQLException ex) 
         {
@@ -36,7 +41,24 @@ public class Teatros {
             return false;
 
         }
+        getTipo(user);
+        System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo);
         return true;
+    }
+    
+    private static void getTipo(String user){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPStipoLogin ?");
+            ct.setString(1, user);
+            ResultSet rs = ct.executeQuery();
+            
+            if(rs.next()){
+                System.out.println(rs.getString(1));
+                Tipo = rs.getString(1);
+            }
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
     
 }
