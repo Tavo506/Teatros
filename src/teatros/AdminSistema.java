@@ -41,6 +41,7 @@ public class AdminSistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador del Sistema");
+        setMaximumSize(new java.awt.Dimension(900, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,6 +70,11 @@ public class AdminSistema extends javax.swing.JFrame {
         IncTeatroB.setToolTipText("Incluir un nuevo teatro");
         IncTeatroB.setFocusPainted(false);
         IncTeatroB.setPreferredSize(new java.awt.Dimension(280, 93));
+        IncTeatroB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncTeatroBActionPerformed(evt);
+            }
+        });
         Panel.add(IncTeatroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 440, 390, 140));
 
         IncAdminB.setBackground(new java.awt.Color(51, 51, 51));
@@ -78,6 +84,11 @@ public class AdminSistema extends javax.swing.JFrame {
         IncAdminB.setToolTipText("Incluir un nuevo administrador para un teatro");
         IncAdminB.setFocusPainted(false);
         IncAdminB.setPreferredSize(new java.awt.Dimension(280, 93));
+        IncAdminB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncAdminBActionPerformed(evt);
+            }
+        });
         Panel.add(IncAdminB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 390, 140));
 
         Cerrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -101,6 +112,16 @@ public class AdminSistema extends javax.swing.JFrame {
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed
+
+    private void IncAdminBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncAdminBActionPerformed
+        new IncluirAdmin(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_IncAdminBActionPerformed
+
+    private void IncTeatroBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncTeatroBActionPerformed
+        new IncluirTeatro(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_IncTeatroBActionPerformed
 
     /**
      * @param args the command line arguments

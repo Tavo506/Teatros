@@ -53,6 +53,19 @@ public class Teatros {
         return tipo;
     }
     
+    public static boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Long.parseLong(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+        return resultado;
+    }
+    
     private static String getTipo(String user){
         String tipo = null;
         try{
@@ -70,4 +83,30 @@ public class Teatros {
         return tipo;
     }
     
+    public static boolean InsertAdmin(){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC func");
+            ResultSet rs = ct.executeQuery();
+            
+            return true;
+        }catch (SQLException e){
+            return false;
+        }
+    }
+    
+    
+    /* Plantilla 
+    
+    public static boolean name()throws SQLException{
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC func");
+            ResultSet rs = ct.executeQuery();
+    
+            return true;
+        }catch (SQLException e){
+            throw e;
+        }
+    }
+    
+    */
 }

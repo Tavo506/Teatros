@@ -172,16 +172,19 @@ public class LoginFrame extends javax.swing.JFrame {
     private void TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TActionPerformed
         Teatros.Login("aperez", "ova4Che");
         new AdminTeatro();
+        this.dispose();
     }//GEN-LAST:event_TActionPerformed
 
     private void SActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SActionPerformed
         Teatros.Login("aconejo", "Con4Use");
         new AdminSistema();
+        this.dispose();
     }//GEN-LAST:event_SActionPerformed
 
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         Teatros.Login("jramos", "Efacha2");
         new Agente();
+        this.dispose();
     }//GEN-LAST:event_AActionPerformed
 
     void Login(){
