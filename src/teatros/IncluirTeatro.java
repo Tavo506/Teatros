@@ -31,6 +31,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
     public IncluirTeatro(JFrame p) {
         initComponents();
         principal = p;
+        PanelAsientos.setVisible(false);
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -50,12 +51,20 @@ public class IncluirTeatro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PanelAsientos = new javax.swing.JPanel();
+        BGuardar = new javax.swing.JButton();
+        BAnterior = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        tBloque = new javax.swing.JTextField();
+        AgregarBloque = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
         PanelDatos = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         BSiguiente = new javax.swing.JButton();
         tNombre = new javax.swing.JTextField();
         tDireccion = new javax.swing.JTextField();
@@ -70,14 +79,67 @@ public class IncluirTeatro extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PanelDatos.setBackground(new java.awt.Color(0, 102, 102));
-        PanelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelAsientos.setBackground(new java.awt.Color(0, 102, 51));
+        PanelAsientos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Sitio web :");
-        PanelDatos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 200, 40));
+        BGuardar.setBackground(new java.awt.Color(51, 51, 51));
+        BGuardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        BGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        BGuardar.setText("Guardar");
+        BGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BGuardarActionPerformed(evt);
+            }
+        });
+        PanelAsientos.add(BGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
+
+        BAnterior.setBackground(new java.awt.Color(51, 51, 51));
+        BAnterior.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        BAnterior.setForeground(new java.awt.Color(255, 255, 255));
+        BAnterior.setText("Anterior");
+        BAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BAnteriorActionPerformed(evt);
+            }
+        });
+        PanelAsientos.add(BAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Filas :");
+        PanelAsientos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, 30));
+
+        tBloque.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tBloque.setForeground(new java.awt.Color(255, 255, 255));
+        PanelAsientos.add(tBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 72, 420, -1));
+
+        AgregarBloque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMas.png"))); // NOI18N
+        AgregarBloque.setBorderPainted(false);
+        AgregarBloque.setFocusPainted(false);
+        AgregarBloque.setPreferredSize(new java.awt.Dimension(37, 37));
+        AgregarBloque.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMasP.png"))); // NOI18N
+        AgregarBloque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarBloqueActionPerformed(evt);
+            }
+        });
+        PanelAsientos.add(AgregarBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 70, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Bloque :");
+        PanelAsientos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 30));
+
+        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        PanelAsientos.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 260, 30));
+
+        getContentPane().add(PanelAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
+
+        PanelDatos.setBackground(new java.awt.Color(0, 102, 102));
+        PanelDatos.setPreferredSize(new java.awt.Dimension(700, 600));
+        PanelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,9 +165,21 @@ public class IncluirTeatro extends javax.swing.JFrame {
         jLabel6.setText("Correo :");
         PanelDatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 200, 40));
 
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Sitio web :");
+        PanelDatos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 200, 40));
+
+        BSiguiente.setBackground(new java.awt.Color(51, 51, 51));
         BSiguiente.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         BSiguiente.setForeground(new java.awt.Color(255, 255, 255));
         BSiguiente.setText("Siguiente");
+        BSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BSiguienteActionPerformed(evt);
+            }
+        });
         PanelDatos.add(BSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, -1, -1));
 
         tNombre.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -123,7 +197,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         tWeb.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         PanelDatos.add(tWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 420, 40));
 
-        getContentPane().add(PanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
+        getContentPane().add(PanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
@@ -134,6 +208,25 @@ public class IncluirTeatro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
+        PanelDatos.setVisible(false);
+        PanelAsientos.setVisible(true);
+    }//GEN-LAST:event_BSiguienteActionPerformed
+
+    private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BGuardarActionPerformed
+
+    private void BAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAnteriorActionPerformed
+        PanelAsientos.setVisible(false);
+        PanelDatos.setVisible(true);
+    }//GEN-LAST:event_BAnteriorActionPerformed
+
+    private void AgregarBloqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBloqueActionPerformed
+
+        
+    }//GEN-LAST:event_AgregarBloqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,15 +264,23 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarBloque;
+    private javax.swing.JButton BAnterior;
+    private javax.swing.JButton BGuardar;
     private javax.swing.JButton BSiguiente;
     private javax.swing.JLabel Fondo;
+    private javax.swing.JPanel PanelAsientos;
     private javax.swing.JPanel PanelDatos;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField tBloque;
     private javax.swing.JTextField tCorreo;
     private javax.swing.JTextField tDireccion;
     private javax.swing.JTextField tNombre;
