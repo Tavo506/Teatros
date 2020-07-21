@@ -33,6 +33,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
     public IncluirAdmin(JFrame p) {
         initComponents();
         principal = p;
+        cargarTeatros();
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -41,6 +42,10 @@ public class IncluirAdmin extends javax.swing.JFrame {
     void cerrar(){
         this.dispose();
         principal.setVisible(true);
+    }
+    
+    void cargarTeatros(){
+        Teatros.selectTeatros(ComboTeatros);
     }
 
     /**
@@ -99,7 +104,6 @@ public class IncluirAdmin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ComboTeatros.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
-        ComboTeatros.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teatro Nacional", "Otro" }));
         ComboTeatros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboTeatrosActionPerformed(evt);
@@ -283,7 +287,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
     @SuppressWarnings("deprecation")
     private void CrearAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearAdminActionPerformed
         String teatro, nombre, apellido, cedula, sexo, direccion, telCelular, telCasa, telOtro, correo, user, pass, passConf, dia, mes, anno;
-        Date nacimiento;
+        Date nacimiento = null;
         
         //Toma de datos
         teatro = ComboTeatros.getSelectedItem().toString();
@@ -312,7 +316,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
         
 
         if(!comprobar(nombre, apellido, cedula, dia, mes, anno,direccion, telCelular, telCasa, telOtro, correo, user, pass, passConf)){
-            //return;
+            return;
         }
         
         try{
@@ -322,7 +326,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
         }
         
 
-        boolean state = Teatros.InsertAdmin();
+        //boolean state = Teatros.InsertAdmin(teatro, nombre + " " + apellido, cedula, sexo, nacimiento, direccion, telCelular, telCasa, telOtro, correo, user, pass);
 
         
     }//GEN-LAST:event_CrearAdminActionPerformed

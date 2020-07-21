@@ -8,7 +8,9 @@ package teatros;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,12 +18,17 @@ import javax.swing.JFrame;
  */
 public class IncluirTeatro extends javax.swing.JFrame {
     JFrame principal;
+    DefaultTableModel modelo;
     public WindowListener c = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
             cerrar();
         }
     };
+    
+    ArrayList<String> bloques = new ArrayList<>();
+    ArrayList<Integer> cantFilas = new ArrayList<>();
+    ArrayList<Integer[]> asientosXFila = new ArrayList<>();
     
     
     /**
@@ -31,7 +38,9 @@ public class IncluirTeatro extends javax.swing.JFrame {
     public IncluirTeatro(JFrame p) {
         initComponents();
         principal = p;
+        modelo = (DefaultTableModel) TablaBloques.getModel();
         PanelAsientos.setVisible(false);
+        PanelFilas.setVisible(false);
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -51,14 +60,20 @@ public class IncluirTeatro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         PanelAsientos = new javax.swing.JPanel();
-        BGuardar = new javax.swing.JButton();
-        BAnterior = new javax.swing.JButton();
+        BSiguiente2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         tBloque = new javax.swing.JTextField();
         AgregarBloque = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        ComboBloques = new javax.swing.JComboBox<>();
+        sFilas = new javax.swing.JSpinner();
+        AgregarFila = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TablaBloques = new javax.swing.JTable();
+        PanelFilas = new javax.swing.JPanel();
+        Guardar = new javax.swing.JButton();
         PanelDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -72,37 +87,32 @@ public class IncluirTeatro extends javax.swing.JFrame {
         tCorreo = new javax.swing.JTextField();
         tWeb = new javax.swing.JTextField();
         Fondo = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Insertar Teatro");
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Agregar Teatro");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 700, -1));
+
         PanelAsientos.setBackground(new java.awt.Color(0, 102, 51));
+        PanelAsientos.setOpaque(false);
         PanelAsientos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BGuardar.setBackground(new java.awt.Color(51, 51, 51));
-        BGuardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        BGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        BGuardar.setText("Guardar");
-        BGuardar.addActionListener(new java.awt.event.ActionListener() {
+        BSiguiente2.setBackground(new java.awt.Color(51, 51, 51));
+        BSiguiente2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        BSiguiente2.setForeground(new java.awt.Color(255, 255, 255));
+        BSiguiente2.setText("Siguiente");
+        BSiguiente2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BGuardarActionPerformed(evt);
+                BSiguiente2ActionPerformed(evt);
             }
         });
-        PanelAsientos.add(BGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 480, -1, -1));
-
-        BAnterior.setBackground(new java.awt.Color(51, 51, 51));
-        BAnterior.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        BAnterior.setForeground(new java.awt.Color(255, 255, 255));
-        BAnterior.setText("Anterior");
-        BAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BAnteriorActionPerformed(evt);
-            }
-        });
-        PanelAsientos.add(BAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, -1, -1));
+        PanelAsientos.add(BSiguiente2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,7 +121,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelAsientos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 170, 30));
 
         tBloque.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        tBloque.setForeground(new java.awt.Color(255, 255, 255));
+        tBloque.setForeground(new java.awt.Color(0, 0, 0));
         PanelAsientos.add(tBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 72, 420, -1));
 
         AgregarBloque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMas.png"))); // NOI18N
@@ -132,12 +142,79 @@ public class IncluirTeatro extends javax.swing.JFrame {
         jLabel8.setText("Bloque :");
         PanelAsientos.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 170, 30));
 
-        jComboBox1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        PanelAsientos.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 260, 30));
+        ComboBloques.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        ComboBloques.setForeground(new java.awt.Color(0, 0, 0));
+        ComboBloques.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ComboBloquesItemStateChanged(evt);
+            }
+        });
+        PanelAsientos.add(ComboBloques, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 330, 40));
+
+        sFilas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        sFilas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        PanelAsientos.add(sFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 70, 40));
+
+        AgregarFila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMas.png"))); // NOI18N
+        AgregarFila.setBorderPainted(false);
+        AgregarFila.setFocusPainted(false);
+        AgregarFila.setPreferredSize(new java.awt.Dimension(37, 37));
+        AgregarFila.setPressedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMasP.png"))); // NOI18N
+        AgregarFila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarFilaActionPerformed(evt);
+            }
+        });
+        PanelAsientos.add(AgregarFila, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+
+        TablaBloques.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bloque", "Filas"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        TablaBloques.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(TablaBloques);
+        if (TablaBloques.getColumnModel().getColumnCount() > 0) {
+            TablaBloques.getColumnModel().getColumn(0).setResizable(false);
+            TablaBloques.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        PanelAsientos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 430, 250));
 
         getContentPane().add(PanelAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
 
+        PanelFilas.setBackground(new java.awt.Color(0, 102, 153));
+        PanelFilas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Guardar.setBackground(new java.awt.Color(51, 51, 51));
+        Guardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        Guardar.setForeground(new java.awt.Color(255, 255, 255));
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        PanelFilas.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
+
+        getContentPane().add(PanelFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
+
         PanelDatos.setBackground(new java.awt.Color(0, 102, 102));
+        PanelDatos.setOpaque(false);
         PanelDatos.setPreferredSize(new java.awt.Dimension(700, 600));
         PanelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -198,13 +275,9 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelDatos.add(tWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 420, 40));
 
         getContentPane().add(PanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Agregar Teatro");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 700, -1));
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoIncTeatro.png"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,19 +287,40 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelAsientos.setVisible(true);
     }//GEN-LAST:event_BSiguienteActionPerformed
 
-    private void BGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BGuardarActionPerformed
-
-    private void BAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BAnteriorActionPerformed
+    private void BSiguiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguiente2ActionPerformed
         PanelAsientos.setVisible(false);
-        PanelDatos.setVisible(true);
-    }//GEN-LAST:event_BAnteriorActionPerformed
+        PanelFilas.setVisible(true);
+    }//GEN-LAST:event_BSiguiente2ActionPerformed
 
     private void AgregarBloqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarBloqueActionPerformed
-
+        String bloque = tBloque.getText();
         
+        if(!(bloque.trim().isEmpty() || bloques.contains(bloque))){
+            tBloque.setText("");
+            
+            bloques.add(bloque);
+            cantFilas.add(1);
+            
+            modelo.addRow(new Object[]{bloque, 1});
+            ComboBloques.addItem(bloque);
+        }
     }//GEN-LAST:event_AgregarBloqueActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void AgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFilaActionPerformed
+        int indice = ComboBloques.getSelectedIndex();
+        int valor = (int) sFilas.getValue();
+        cantFilas.set(indice, valor);
+        modelo.setValueAt(valor, indice, 1);
+    }//GEN-LAST:event_AgregarFilaActionPerformed
+
+    private void ComboBloquesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboBloquesItemStateChanged
+        int indice = ComboBloques.getSelectedIndex();
+        sFilas.setValue(cantFilas.get(indice));
+    }//GEN-LAST:event_ComboBloquesItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -265,13 +359,16 @@ public class IncluirTeatro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarBloque;
-    private javax.swing.JButton BAnterior;
-    private javax.swing.JButton BGuardar;
+    private javax.swing.JButton AgregarFila;
     private javax.swing.JButton BSiguiente;
+    private javax.swing.JButton BSiguiente2;
+    private javax.swing.JComboBox<String> ComboBloques;
     private javax.swing.JLabel Fondo;
+    private javax.swing.JButton Guardar;
     private javax.swing.JPanel PanelAsientos;
     private javax.swing.JPanel PanelDatos;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JPanel PanelFilas;
+    private javax.swing.JTable TablaBloques;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -280,6 +377,8 @@ public class IncluirTeatro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner sFilas;
     private javax.swing.JTextField tBloque;
     private javax.swing.JTextField tCorreo;
     private javax.swing.JTextField tDireccion;

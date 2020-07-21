@@ -6,10 +6,12 @@
 package teatros;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -83,14 +85,28 @@ public class Teatros {
         return tipo;
     }
     
-    public static boolean InsertAdmin(){
+    public static boolean InsertAdmin(String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass){
         try{
-            PreparedStatement ct = con.prepareStatement("EXEC func");
+            PreparedStatement ct = con.prepareStatement("EXEC func ?,?,?,?,?,?,?,?,?,?,?,?");
             ResultSet rs = ct.executeQuery();
             
             return true;
         }catch (SQLException e){
             return false;
+        }
+    }
+    
+    public static void selectTeatros(JComboBox combo){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSteatros");
+            ResultSet rs = ct.executeQuery();
+            
+            while(rs.next()){
+                combo.addItem(rs.getString(1));
+            }
+    
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
     
