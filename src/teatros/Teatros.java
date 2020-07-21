@@ -122,13 +122,28 @@ public class Teatros {
                 if(nombre.equals(rs.getString(1))){
                     JOptionPane.showMessageDialog(p, "Nombre del teatro ya usado", "Advertencia",0);
                     return false;
-                }else if(direccion.equals(rs.getString(2))){
                     
+                }else if(direccion.equals(rs.getString(2))){
+                    JOptionPane.showMessageDialog(p, "Dirección del teatro ya usado", "Advertencia",0);
+                    return false;
+                    
+                }else if(telefono == rs.getInt(3)){
+                    JOptionPane.showMessageDialog(p, "Telefono del teatro ya usado", "Advertencia",0);
+                    return false;
+                    
+                }else if(correo.equals(rs.getString(4))){
+                    JOptionPane.showMessageDialog(p, "Correo del teatro ya usado", "Advertencia",0);
+                    return false;
+                    
+                }else if(web.equals(rs.getString(5))){
+                    JOptionPane.showMessageDialog(p, "Sitio web del teatro ya usado", "Advertencia",0);
+                    return false;
                 }
             }
             
             return true;
         }catch (SQLException e){
+            System.out.println(e.getMessage());
             return false;
         }
     }

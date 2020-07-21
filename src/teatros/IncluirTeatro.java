@@ -337,16 +337,15 @@ public class IncluirTeatro extends javax.swing.JFrame {
         correo = tCorreo.getText();
         web = tWeb.getText();
         
-        if(!revisarDatos(nombre, direccion, telefono, correo, web)){
+        if(revisarDatos(nombre, direccion, telefono, correo, web)){
             
             if(Teatros.revisaTeatro(this, nombre, direccion, Integer.parseInt(telefono), correo, web)){
-                
+                PanelDatos.setVisible(false);
+                PanelAsientos.setVisible(true);
             }
             
         }
         
-        PanelDatos.setVisible(false);
-        PanelAsientos.setVisible(true);
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     
