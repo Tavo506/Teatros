@@ -5,12 +5,17 @@
  */
 package teatros;
 
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
+
+
+
 
 /**
  *
@@ -18,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class IncluirTeatro extends javax.swing.JFrame {
     JFrame principal;
-    DefaultTableModel modelo;
+    DefaultTableModel modelo, modelo2;
     public WindowListener c = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
@@ -39,6 +44,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         initComponents();
         principal = p;
         modelo = (DefaultTableModel) TablaBloques.getModel();
+        modelo2 = (DefaultTableModel) tablaFilas.getModel();
         PanelAsientos.setVisible(false);
         PanelFilas.setVisible(false);
         this.addWindowListener(c);
@@ -61,6 +67,10 @@ public class IncluirTeatro extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        PanelFilas = new javax.swing.JPanel();
+        Guardar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaFilas = new javax.swing.JTable();
         PanelAsientos = new javax.swing.JPanel();
         BSiguiente2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
@@ -72,8 +82,6 @@ public class IncluirTeatro extends javax.swing.JFrame {
         AgregarFila = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaBloques = new javax.swing.JTable();
-        PanelFilas = new javax.swing.JPanel();
-        Guardar = new javax.swing.JButton();
         PanelDatos = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -98,6 +106,57 @@ public class IncluirTeatro extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Agregar Teatro");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 700, -1));
+
+        PanelFilas.setBackground(new java.awt.Color(0, 102, 153));
+        PanelFilas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Guardar.setBackground(new java.awt.Color(51, 51, 51));
+        Guardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        Guardar.setForeground(new java.awt.Color(255, 255, 255));
+        Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
+        PanelFilas.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
+
+        tablaFilas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bloque", "Fila", "Asientos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaFilas.setRequestFocusEnabled(false);
+        tablaFilas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaFilas);
+        if (tablaFilas.getColumnModel().getColumnCount() > 0) {
+            tablaFilas.getColumnModel().getColumn(0).setResizable(false);
+            tablaFilas.getColumnModel().getColumn(1).setResizable(false);
+            tablaFilas.getColumnModel().getColumn(2).setResizable(false);
+            tablaFilas.getColumnModel().getColumn(2).setCellEditor(null);
+        }
+
+        PanelFilas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
+
+        getContentPane().add(PanelFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
 
         PanelAsientos.setBackground(new java.awt.Color(0, 102, 51));
         PanelAsientos.setOpaque(false);
@@ -152,7 +211,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelAsientos.add(ComboBloques, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 330, 40));
 
         sFilas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sFilas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        sFilas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 27, 1));
         PanelAsientos.add(sFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 70, 40));
 
         AgregarFila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMas.png"))); // NOI18N
@@ -196,22 +255,6 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelAsientos.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 430, 250));
 
         getContentPane().add(PanelAsientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
-
-        PanelFilas.setBackground(new java.awt.Color(0, 102, 153));
-        PanelFilas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Guardar.setBackground(new java.awt.Color(51, 51, 51));
-        Guardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        Guardar.setForeground(new java.awt.Color(255, 255, 255));
-        Guardar.setText("Guardar");
-        Guardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
-            }
-        });
-        PanelFilas.add(Guardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, -1, -1));
-
-        getContentPane().add(PanelFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 700, 600));
 
         PanelDatos.setBackground(new java.awt.Color(0, 102, 102));
         PanelDatos.setOpaque(false);
@@ -288,6 +331,17 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     private void BSiguiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguiente2ActionPerformed
+        for(Integer cant : cantFilas){
+            asientosXFila.add(new Integer[cant]);
+        }
+        
+        for(int i = 0; i < bloques.size(); i++){
+            for(int j = 0; j < cantFilas.get(i); j++){
+                modelo2.addRow(new Object[]{bloques.get(i), (char)(j+'A'), 0});
+            }
+        }
+        
+        
         PanelAsientos.setVisible(false);
         PanelFilas.setVisible(true);
     }//GEN-LAST:event_BSiguiente2ActionPerformed
@@ -378,6 +432,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner sFilas;
     private javax.swing.JTextField tBloque;
     private javax.swing.JTextField tCorreo;
@@ -385,5 +440,6 @@ public class IncluirTeatro extends javax.swing.JFrame {
     private javax.swing.JTextField tNombre;
     private javax.swing.JTextField tTelefono;
     private javax.swing.JTextField tWeb;
+    private javax.swing.JTable tablaFilas;
     // End of variables declaration//GEN-END:variables
 }
