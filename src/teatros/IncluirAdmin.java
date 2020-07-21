@@ -333,7 +333,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
 
     boolean comprobar(String nombre, String apellido, String cedula, String dia, String mes, String anno, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass, String passConf){
         //Valida que los campos no estén vacíos
-        if(!(nombre.trim().isEmpty() && apellido.trim().isEmpty() && cedula.trim().isEmpty() && dia.trim().isEmpty() && mes.trim().isEmpty() && anno.trim().isEmpty() && direccion.trim().isEmpty() && telCelular.trim().isEmpty() && correo.trim().isEmpty() && user.trim().isEmpty() && pass.trim().isEmpty() && passConf.trim().isEmpty())){
+        if(nombre.trim().isEmpty() || apellido.trim().isEmpty() || cedula.trim().isEmpty() || dia.trim().isEmpty() || mes.trim().isEmpty() || anno.trim().isEmpty() || direccion.trim().isEmpty() || telCelular.trim().isEmpty() || correo.trim().isEmpty() || user.trim().isEmpty() || pass.trim().isEmpty() || passConf.trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "Hay datos obligatorios sin llenar", "Advertencia",0);
             
         //Valida la cedula

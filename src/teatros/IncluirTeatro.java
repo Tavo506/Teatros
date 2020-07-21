@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
@@ -108,6 +109,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 700, -1));
 
         PanelFilas.setBackground(new java.awt.Color(0, 102, 153));
+        PanelFilas.setOpaque(false);
         PanelFilas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Guardar.setBackground(new java.awt.Color(51, 51, 51));
@@ -211,7 +213,8 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelAsientos.add(ComboBloques, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 330, 40));
 
         sFilas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        sFilas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 27, 1));
+        sFilas.setModel(new javax.swing.SpinnerNumberModel(1, 1, 26, 1));
+        sFilas.setOpaque(false);
         PanelAsientos.add(sFilas, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 70, 40));
 
         AgregarFila.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/BotonMas.png"))); // NOI18N
@@ -326,10 +329,42 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
+        String nombre, direccion, telefono, correo, web;
+        
+        nombre = tNombre.getText();
+        direccion = tDireccion.getText();
+        telefono = tTelefono.getText();
+        correo = tCorreo.getText();
+        web = tWeb.getText();
+        
+        if(!revisarDatos(nombre, direccion, telefono, correo, web)){
+            
+            if(Teatros.revisaTeatro(this, nombre, direccion, Integer.parseInt(telefono), correo, web)){
+                
+            }
+            
+        }
+        
         PanelDatos.setVisible(false);
         PanelAsientos.setVisible(true);
     }//GEN-LAST:event_BSiguienteActionPerformed
 
+    
+    boolean revisarDatos(String nombre, String direccion, String telefono, String correo, String web){
+        if(nombre.trim().isEmpty() || direccion.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || web.trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Debe llenar todos los datos", "Advertencia", 0);
+        
+        }else if(!(telefono.length() == 8 && Teatros.isNumeric(telefono))){
+            JOptionPane.showMessageDialog(this, "Teléfono inválido", "Advertencia",0);
+            
+        }else{
+            return true;
+        }
+            
+        return false;
+    }
+    
+    
     private void BSiguiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguiente2ActionPerformed
         for(Integer cant : cantFilas){
             asientosXFila.add(new Integer[cant]);

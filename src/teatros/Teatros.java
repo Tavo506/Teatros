@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -110,6 +112,26 @@ public class Teatros {
         }
     }
     
+    public static boolean revisaTeatro(JFrame p, String nombre, String direccion, int telefono, String correo, String web){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSteatros");
+            ResultSet rs = ct.executeQuery();
+    
+            while(rs.next()){
+            
+                if(nombre.equals(rs.getString(1))){
+                    JOptionPane.showMessageDialog(p, "Nombre del teatro ya usado", "Advertencia",0);
+                    return false;
+                }else if(direccion.equals(rs.getString(2))){
+                    
+                }
+            }
+            
+            return true;
+        }catch (SQLException e){
+            return false;
+        }
+    }
     
     /* Plantilla 
     
