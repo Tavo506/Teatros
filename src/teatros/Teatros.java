@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class Teatros {
     public static Connection con;
-    public static String User, Password, Tipo;
+    public static String User, Password, Tipo, Teatro;
 
     /**
      * @param args the command line arguments
@@ -53,7 +53,7 @@ public class Teatros {
         String tipo = getTipo(user);
         Tipo = tipo;
         
-        System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo);
+        System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo + "\n" + Teatro);
         return tipo;
     }
     
@@ -78,8 +78,8 @@ public class Teatros {
             ResultSet rs = ct.executeQuery();
             
             if(rs.next()){
-                System.out.println(rs.getString(1));
                 tipo = rs.getString(1);
+                Teatro = rs.getString(2);
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -87,9 +87,46 @@ public class Teatros {
         return tipo;
     }
     
-    public static boolean InsertAdmin(String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass){
+    public static boolean checkEmpleado(JFrame p, String cedula, String telCelular, String correo, String usuario){
         try{
-            PreparedStatement ct = con.prepareStatement("EXEC func ?,?,?,?,?,?,?,?,?,?,?,?");
+            PreparedStatement ct = con.prepareStatement("EXEC SPStrabajadores");
+            ResultSet rs = ct.executeQuery();
+            
+            while(rs.next()){
+                if(cedula.equals(rs.getString(1))){
+                    JOptionPane.showMessageDialog(p, "Cédula ya existe", "Advertencia",0);
+                    return false;
+                    
+                }else if(telCelular.equals(Integer.toString(rs.getInt(2)))){
+                    JOptionPane.showMessageDialog(p, "Teléfono celular ya existe", "Advertencia",0);
+                    return false;
+                    
+                }else if(correo.equals(rs.getString(3))){
+                    JOptionPane.showMessageDialog(p, "Correo ya existe", "Advertencia",0);
+                    return false;
+                    
+                }else if(usuario.equals(rs.getString(4))){
+                    JOptionPane.showMessageDialog(p, "Nombre de usuario ya utilizado", "Advertencia",0);
+                    return false;
+                    
+                }
+            }
+    
+            return true;
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    public static boolean InsertAdmin(JFrame p, String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass){
+        try{
+            
+            if(!checkEmpleado(p, cedula, telCelular, correo, user)){
+                return false;
+            }
+            
+            PreparedStatement ct = con.prepareStatement("EXEC SPIAdminTeatro ?,?,?,?,?,?,?,?,?,?,?,?");
             ResultSet rs = ct.executeQuery();
             
             return true;

@@ -326,7 +326,14 @@ public class IncluirAdmin extends javax.swing.JFrame {
         }
         
 
-        //boolean state = Teatros.InsertAdmin(teatro, nombre + " " + apellido, cedula, sexo, nacimiento, direccion, telCelular, telCasa, telOtro, correo, user, pass);
+        boolean state = Teatros.InsertAdmin(this, teatro, nombre + " " + apellido, cedula, sexo, nacimiento, direccion, telCelular, telCasa, telOtro, correo, user, pass);
+        
+        if(!state){
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this, "Administrador agregado exitosamente", "Info",1);
+        cerrar();
 
         
     }//GEN-LAST:event_CrearAdminActionPerformed

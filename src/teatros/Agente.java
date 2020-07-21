@@ -16,6 +16,7 @@ public class Agente extends javax.swing.JFrame {
      */
     public Agente() {
         initComponents();
+        TeatroLabel.setText(Teatros.Teatro);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -30,6 +31,7 @@ public class Agente extends javax.swing.JFrame {
     private void initComponents() {
 
         Panel = new javax.swing.JPanel();
+        TeatroLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         IncAdminB = new javax.swing.JButton();
@@ -45,6 +47,12 @@ public class Agente extends javax.swing.JFrame {
         Panel.setOpaque(false);
         Panel.setPreferredSize(new java.awt.Dimension(650, 720));
         Panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TeatroLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        TeatroLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TeatroLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TeatroLabel.setText("<Teatro>");
+        Panel.add(TeatroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 650, -1));
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,6 +137,7 @@ public class Agente extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton IncAdminB;
     private javax.swing.JPanel Panel;
+    private javax.swing.JLabel TeatroLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

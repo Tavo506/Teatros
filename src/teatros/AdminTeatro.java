@@ -16,6 +16,7 @@ public class AdminTeatro extends javax.swing.JFrame {
      */
     public AdminTeatro() {
         initComponents();
+        TeatroLabel.setText(Teatros.Teatro);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -36,6 +37,7 @@ public class AdminTeatro extends javax.swing.JFrame {
         IncTeatroB = new javax.swing.JButton();
         IncAdminB = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
+        TeatroLabel = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,14 +53,14 @@ public class AdminTeatro extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Administrar Teatro");
-        Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, -1));
+        jLabel1.setText("Administrar");
+        Panel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 650, -1));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Administrar Teatro");
-        Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, 70));
+        jLabel2.setText("Administrar");
+        Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 650, 70));
 
         IncTeatroB1.setBackground(new java.awt.Color(51, 51, 51));
         IncTeatroB1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
@@ -95,6 +97,12 @@ public class AdminTeatro extends javax.swing.JFrame {
             }
         });
         Panel.add(Cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 690, -1, -1));
+
+        TeatroLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        TeatroLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TeatroLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TeatroLabel.setText("<Teatro>");
+        Panel.add(TeatroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 650, -1));
 
         getContentPane().add(Panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -151,6 +159,7 @@ public class AdminTeatro extends javax.swing.JFrame {
     private javax.swing.JButton IncTeatroB;
     private javax.swing.JButton IncTeatroB1;
     private javax.swing.JPanel Panel;
+    private javax.swing.JLabel TeatroLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
