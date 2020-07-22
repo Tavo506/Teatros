@@ -151,6 +151,37 @@ public class Teatros {
         }
     }
     
+    public static boolean InsertAgente(JFrame p, String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass) throws SQLException{
+        try{
+            
+            if(!checkEmpleado(p, cedula, telCelular, correo, user)){
+                return false;
+            }
+            
+            PreparedStatement ct = con.prepareStatement("EXEC SPIAgente ?,?,?,?,?,?,?,?,?,?,?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, nombre);
+            ct.setInt(3, Integer.parseInt(cedula));
+            ct.setString(4, sexo);
+            ct.setDate(5, nacimiento);
+            ct.setString(6, direccion);
+            ct.setInt(7, Integer.parseInt(telCelular));
+            ct.setInt(8, Integer.parseInt(telCasa));
+            ct.setInt(9, Integer.parseInt(telOtro));
+            ct.setString(10, correo);
+            ct.setString(11, user);
+            ct.setString(12, pass);
+            
+            ct.executeUpdate();
+
+            
+            return true;
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+            throw e;
+        }
+    }
+    
     public static void selectTeatros(JComboBox combo){
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPSteatros");
@@ -252,6 +283,23 @@ public class Teatros {
             }
 
         }catch (SQLException e){
+            throw e;
+        }
+    }
+    
+    public static boolean insertProduccion(JFrame p, String teatro, String obra, String detalles, String tipo, String estado)throws SQLException{
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPIProduccion ?,?,?,?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, obra);
+            ct.setString(3, tipo);
+            ct.setString(4, detalles);
+            ct.setString(5, estado);
+            ct.executeUpdate();
+    
+            return true;
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
             throw e;
         }
     }

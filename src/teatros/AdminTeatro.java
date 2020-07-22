@@ -33,9 +33,9 @@ public class AdminTeatro extends javax.swing.JFrame {
         Panel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        IncTeatroB1 = new javax.swing.JButton();
-        IncTeatroB = new javax.swing.JButton();
-        IncAdminB = new javax.swing.JButton();
+        IncAgente = new javax.swing.JButton();
+        AdminProdu = new javax.swing.JButton();
+        IncProdu = new javax.swing.JButton();
         Cerrar = new javax.swing.JButton();
         TeatroLabel = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
@@ -62,32 +62,47 @@ public class AdminTeatro extends javax.swing.JFrame {
         jLabel2.setText("Administrar");
         Panel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 650, 70));
 
-        IncTeatroB1.setBackground(new java.awt.Color(51, 51, 51));
-        IncTeatroB1.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        IncTeatroB1.setForeground(new java.awt.Color(255, 255, 255));
-        IncTeatroB1.setText("Incluir Agente");
-        IncTeatroB1.setToolTipText("Incluir un nuevo agente para el teatro");
-        IncTeatroB1.setFocusPainted(false);
-        IncTeatroB1.setPreferredSize(new java.awt.Dimension(280, 93));
-        Panel.add(IncTeatroB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 390, 140));
+        IncAgente.setBackground(new java.awt.Color(51, 51, 51));
+        IncAgente.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        IncAgente.setForeground(new java.awt.Color(255, 255, 255));
+        IncAgente.setText("Incluir Agente");
+        IncAgente.setToolTipText("Incluir un nuevo agente para el teatro");
+        IncAgente.setFocusPainted(false);
+        IncAgente.setPreferredSize(new java.awt.Dimension(280, 93));
+        IncAgente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncAgenteActionPerformed(evt);
+            }
+        });
+        Panel.add(IncAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 520, 390, 140));
 
-        IncTeatroB.setBackground(new java.awt.Color(51, 51, 51));
-        IncTeatroB.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
-        IncTeatroB.setForeground(new java.awt.Color(255, 255, 255));
-        IncTeatroB.setText("Administrar Producción");
-        IncTeatroB.setToolTipText("Incluir un nuevo teatro");
-        IncTeatroB.setFocusPainted(false);
-        IncTeatroB.setPreferredSize(new java.awt.Dimension(280, 93));
-        Panel.add(IncTeatroB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 390, 140));
+        AdminProdu.setBackground(new java.awt.Color(51, 51, 51));
+        AdminProdu.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        AdminProdu.setForeground(new java.awt.Color(255, 255, 255));
+        AdminProdu.setText("Administrar Producción");
+        AdminProdu.setToolTipText("Incluir un nuevo teatro");
+        AdminProdu.setFocusPainted(false);
+        AdminProdu.setPreferredSize(new java.awt.Dimension(280, 93));
+        AdminProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AdminProduActionPerformed(evt);
+            }
+        });
+        Panel.add(AdminProdu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 390, 140));
 
-        IncAdminB.setBackground(new java.awt.Color(51, 51, 51));
-        IncAdminB.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        IncAdminB.setForeground(new java.awt.Color(255, 255, 255));
-        IncAdminB.setText("Agregar Producción");
-        IncAdminB.setToolTipText("Agregar una nueva producción para el teatro");
-        IncAdminB.setFocusPainted(false);
-        IncAdminB.setPreferredSize(new java.awt.Dimension(280, 93));
-        Panel.add(IncAdminB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 390, 140));
+        IncProdu.setBackground(new java.awt.Color(51, 51, 51));
+        IncProdu.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        IncProdu.setForeground(new java.awt.Color(255, 255, 255));
+        IncProdu.setText("Agregar Producción");
+        IncProdu.setToolTipText("Agregar una nueva producción para el teatro");
+        IncProdu.setFocusPainted(false);
+        IncProdu.setPreferredSize(new java.awt.Dimension(280, 93));
+        IncProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncProduActionPerformed(evt);
+            }
+        });
+        Panel.add(IncProdu, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 390, 140));
 
         Cerrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Cerrar.setText("Cerrar Sesión");
@@ -116,6 +131,21 @@ public class AdminTeatro extends javax.swing.JFrame {
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed
+
+    private void IncAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncAgenteActionPerformed
+        new IncluirAgente(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_IncAgenteActionPerformed
+
+    private void IncProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncProduActionPerformed
+        new IncluirProdu(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_IncProduActionPerformed
+
+    private void AdminProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdminProduActionPerformed
+        new AdminProdu(this);
+        this.setVisible(false);
+    }//GEN-LAST:event_AdminProduActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,11 +183,11 @@ public class AdminTeatro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AdminProdu;
     private javax.swing.JButton Cerrar;
     private javax.swing.JLabel Fondo;
-    private javax.swing.JButton IncAdminB;
-    private javax.swing.JButton IncTeatroB;
-    private javax.swing.JButton IncTeatroB1;
+    private javax.swing.JButton IncAgente;
+    private javax.swing.JButton IncProdu;
     private javax.swing.JPanel Panel;
     private javax.swing.JLabel TeatroLabel;
     private javax.swing.JLabel jLabel1;
