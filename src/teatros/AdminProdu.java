@@ -27,7 +27,7 @@ public class AdminProdu extends javax.swing.JFrame {
      */
     public AdminProdu(JFrame p) {
         initComponents();
-        //TeatroLabel.setText(Teatros.Teatro);
+        TeatroLabel.setText(Teatros.Teatro);
         principal = p;
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
@@ -49,25 +49,29 @@ public class AdminProdu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        TeatroLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Administrar Producción");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
-        );
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 40)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Administrar  Producciones");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 30, 690, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 280));
+        TeatroLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        TeatroLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TeatroLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TeatroLabel.setText("<Teatro>");
+        jPanel1.add(TeatroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 750));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,6 +112,8 @@ public class AdminProdu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TeatroLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -131,8 +131,8 @@ public class Teatros {
             ct.setString(1, teatro);
             ct.setString(2, nombre);
             ct.setInt(3, Integer.parseInt(cedula));
-            ct.setString(4, sexo);
-            ct.setDate(5, nacimiento);
+            ct.setDate(4, nacimiento);
+            ct.setString(5, sexo);
             ct.setString(6, direccion);
             ct.setInt(7, Integer.parseInt(telCelular));
             ct.setInt(8, Integer.parseInt(telCasa));
@@ -146,7 +146,7 @@ public class Teatros {
             
             return true;
         }catch (SQLException e){
-            System.err.println(e.getMessage());
+            System.err.println(e.getLocalizedMessage());
             throw e;
         }
     }
