@@ -35,6 +35,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
     ArrayList<String> bloques = new ArrayList<>();
     ArrayList<Integer> cantFilas = new ArrayList<>();
     ArrayList<Integer[]> asientosXFila = new ArrayList<>();
+    ArrayList<String[]> datos = new ArrayList<>();
     int cantAsientos = 0;
     
     
@@ -401,12 +402,18 @@ public class IncluirTeatro extends javax.swing.JFrame {
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         String bloqueAnt = tablaFilas.getValueAt(0, 0).toString();
+        String fila;
+        
         int asientos = 0;
         for(int i = 0, j = 0, k = 0; i < tablaFilas.getRowCount(); i++){
             
+            fila = tablaFilas.getValueAt(i, 1).toString();
             asientos = (int)tablaFilas.getValueAt(i, 2);
-            asientosXFila.get(j)[k] = asientos;
+            
+            datos.add(new String[]{bloqueAnt, fila, Integer.toString(asientos)});
+            
             cantAsientos += asientos;
+            
             
             k++;
             try{

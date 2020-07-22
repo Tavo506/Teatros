@@ -201,7 +201,7 @@ public class Teatros {
         }
     }
     
-    public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, int cantidadAsientos, ArrayList<String> bloques, ArrayList<Integer> cantFilas, ArrayList<Integer[]> asientosXFila)throws SQLException{
+    public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, int cantidadAsientos, ArrayList<String> bloques, ArrayList<String[]> datos)throws SQLException{
         try{
             PreparedStatement sT = con.prepareStatement("EXEC SPITeatro ?,?,?,?,?,?");
             sT.setString(1, nombre);
@@ -214,7 +214,7 @@ public class Teatros {
 
             insertBloques(nombre, bloques);
             
-            insertFilas(nombre, bloques, cantFilas, asientosXFila);
+            insertFilas(nombre, datos);
     
             return true;
         }catch (SQLException e){
@@ -238,14 +238,17 @@ public class Teatros {
         }
     }
     
-    static void insertFilas(String teatro, ArrayList<String> bloques, ArrayList<Integer> cantFilas, ArrayList<Integer[]> asientosXFila)throws SQLException{
+    static void insertFilas(String teatro, ArrayList<String[]> datos)throws SQLException{
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPIFila ?,?,?,?");
             ct.setString(1, teatro);
             
-            for(String bloque : bloques){
-                ct.setString(2, bloque);
+            for(String[] dato : datos){
+                ct.setString(1, dato[0]);
+                ct.setString(2, dato[1]);
+                ct.setInt(3, Integer.parseInt(dato[2]));
                 
+                ct.executeQuery();
             }
 
         }catch (SQLException e){
