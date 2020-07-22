@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -119,7 +120,7 @@ public class Teatros {
         }
     }
     
-    public static boolean InsertAdmin(JFrame p, String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass){
+    public static boolean InsertAdmin(JFrame p, String teatro, String nombre, String cedula, String sexo, Date nacimiento, String direccion, String telCelular, String telCasa, String telOtro, String correo, String user, String pass) throws SQLException{
         try{
             
             if(!checkEmpleado(p, cedula, telCelular, correo, user)){
@@ -127,11 +128,26 @@ public class Teatros {
             }
             
             PreparedStatement ct = con.prepareStatement("EXEC SPIAdminTeatro ?,?,?,?,?,?,?,?,?,?,?,?");
-            ResultSet rs = ct.executeQuery();
+            ct.setString(1, teatro);
+            ct.setString(2, nombre);
+            ct.setInt(3, Integer.parseInt(cedula));
+            ct.setString(4, sexo);
+            ct.setDate(5, nacimiento);
+            ct.setString(6, direccion);
+            ct.setInt(7, Integer.parseInt(telCelular));
+            ct.setInt(8, Integer.parseInt(telCasa));
+            ct.setInt(9, Integer.parseInt(telOtro));
+            ct.setString(10, correo);
+            ct.setString(11, user);
+            ct.setString(12, pass);
+            
+            ct.executeUpdate();
+
             
             return true;
         }catch (SQLException e){
-            return false;
+            System.err.println(e.getMessage());
+            throw e;
         }
     }
     
@@ -182,6 +198,58 @@ public class Teatros {
         }catch (SQLException e){
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+    
+    public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, int cantidadAsientos, ArrayList<String> bloques, ArrayList<Integer> cantFilas, ArrayList<Integer[]> asientosXFila)throws SQLException{
+        try{
+            PreparedStatement sT = con.prepareStatement("EXEC SPITeatro ?,?,?,?,?,?");
+            sT.setString(1, nombre);
+            sT.setString(2, direccion);
+            sT.setInt(3, Integer.parseInt(telefono));
+            sT.setString(4, correo);
+            sT.setString(5, web);
+            sT.setInt(6, cantidadAsientos);
+            sT.executeUpdate();            
+
+            insertBloques(nombre, bloques);
+            
+            insertFilas(nombre, bloques, cantFilas, asientosXFila);
+    
+            return true;
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    static void insertBloques(String teatro, ArrayList<String> bloques)throws SQLException{
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPIBloque ?,?");
+            ct.setString(1, teatro);
+            
+            for(String bloque : bloques){
+                ct.setString(2, bloque);
+                ct.executeUpdate();
+            }
+
+        }catch (SQLException e){
+            throw e;
+        }
+    }
+    
+    static void insertFilas(String teatro, ArrayList<String> bloques, ArrayList<Integer> cantFilas, ArrayList<Integer[]> asientosXFila)throws SQLException{
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPIFila ?,?,?,?");
+            ct.setString(1, teatro);
+            
+            for(String bloque : bloques){
+                ct.setString(2, bloque);
+                
+            }
+
+        }catch (SQLException e){
+            throw e;
         }
     }
     

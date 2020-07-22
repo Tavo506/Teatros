@@ -215,45 +215,59 @@ public class IncluirAdmin extends javax.swing.JFrame {
         jPanel1.add(CrearAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 810, 350, 80));
 
         tPassword.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tPassword.setText("123456");
         jPanel1.add(tPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 710, 190, -1));
 
         tConfirmPassword.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tConfirmPassword.setText("123456");
         jPanel1.add(tConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 760, 190, -1));
 
         tCorreo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tCorreo.setText("tav@gmail.com");
         jPanel1.add(tCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 610, 350, -1));
 
         tUsuario.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tUsuario.setText("tavoba");
         jPanel1.add(tUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 660, 190, -1));
 
         tDirección.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tDirección.setText("Barranca");
         jPanel1.add(tDirección, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 350, 30));
 
         tOtro.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jPanel1.add(tOtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 560, 140, 30));
 
         tCasa.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tCasa.setText("24632001");
         jPanel1.add(tCasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, 140, 30));
 
         tNombre.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tNombre.setText("Gustavo");
         jPanel1.add(tNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 350, 30));
 
         tCelular.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tCelular.setText("85548525");
         jPanel1.add(tCelular, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 140, 30));
 
         tAnno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tAnno.setText("2001");
         jPanel1.add(tAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 50, 30));
 
         tMes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tMes.setText("02");
         jPanel1.add(tMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 310, 40, 30));
 
         tDia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tDia.setText("15");
         jPanel1.add(tDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 40, 30));
 
         tCedula.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tCedula.setText("208140295");
+        tCedula.setToolTipText("");
         jPanel1.add(tCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, 140, 30));
 
         tApellido.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tApellido.setText("B A");
         jPanel1.add(tApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 350, 30));
 
         Masculino.setBackground(new java.awt.Color(51, 51, 51));
@@ -307,17 +321,23 @@ public class IncluirAdmin extends javax.swing.JFrame {
         
         direccion = tDirección.getText();
         telCelular = tCelular.getText();
-        telCasa = tCasa.getText();
-        telOtro = tOtro.getText();
         correo = tCorreo.getText();
         user = tUsuario.getText();
         pass = tPassword.getText();
         passConf = tConfirmPassword.getText();
         
+        telCasa = tCasa.getText();
+        
+        telOtro = tOtro.getText();
 
         if(!comprobar(nombre, apellido, cedula, dia, mes, anno,direccion, telCelular, telCasa, telOtro, correo, user, pass, passConf)){
             return;
         }
+        
+        if("".equals(telCasa))
+            telCasa = "0";
+        if("".equals(telOtro))
+            telOtro = "0";
         
         try{
             nacimiento = Date.valueOf(anno + "-" + mes + "-" + dia);
@@ -325,10 +345,17 @@ public class IncluirAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Fecha de nacimiento inválido", "Advertencia",0);
         }
         
-
-        boolean state = Teatros.InsertAdmin(this, teatro, nombre + " " + apellido, cedula, sexo, nacimiento, direccion, telCelular, telCasa, telOtro, correo, user, pass);
+        boolean state = false;
+        
+        try{
+            state = Teatros.InsertAdmin(this, teatro, nombre + " " + apellido, cedula, sexo, nacimiento, direccion, telCelular, telCasa, telOtro, correo, user, pass);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Error al añadir el administrador", "Advertencia",0);
+            return;
+        }
         
         if(!state){
+            JOptionPane.showMessageDialog(this, "No se añadió el administrador", "Advertencia",0);
             return;
         }
         

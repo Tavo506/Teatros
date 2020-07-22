@@ -35,6 +35,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
     ArrayList<String> bloques = new ArrayList<>();
     ArrayList<Integer> cantFilas = new ArrayList<>();
     ArrayList<Integer[]> asientosXFila = new ArrayList<>();
+    int cantAsientos = 0;
     
     
     /**
@@ -365,6 +366,10 @@ public class IncluirTeatro extends javax.swing.JFrame {
     
     
     private void BSiguiente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguiente2ActionPerformed
+        
+        if(TablaBloques.getRowCount() == 0)
+            return;
+        
         for(Integer cant : cantFilas){
             asientosXFila.add(new Integer[cant]);
         }
@@ -395,7 +400,28 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }//GEN-LAST:event_AgregarBloqueActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        // TODO add your handling code here:
+        String bloqueAnt = tablaFilas.getValueAt(0, 0).toString();
+        int asientos = 0;
+        for(int i = 0, j = 0, k = 0; i < tablaFilas.getRowCount(); i++){
+            
+            asientos = (int)tablaFilas.getValueAt(i, 2);
+            asientosXFila.get(j)[k] = asientos;
+            cantAsientos += asientos;
+            
+            k++;
+            try{
+                if(bloqueAnt != tablaFilas.getValueAt(i+1, 0)){
+                    j++;
+                    k=0;
+                    bloqueAnt = tablaFilas.getValueAt(i+1, 0).toString();
+                }
+            }catch(Exception e){
+                break;
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void AgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFilaActionPerformed
@@ -410,6 +436,8 @@ public class IncluirTeatro extends javax.swing.JFrame {
         sFilas.setValue(cantFilas.get(indice));
     }//GEN-LAST:event_ComboBloquesItemStateChanged
 
+    
+    
     /**
      * @param args the command line arguments
      */
