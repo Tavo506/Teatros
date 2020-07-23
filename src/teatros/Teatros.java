@@ -304,6 +304,45 @@ public class Teatros {
         }
     }
     
+    
+    public static ArrayList<String[]> selectProduc(String teatro){
+        ArrayList<String[]> producciones = new ArrayList<>();
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSproducciones ?");
+            ct.setString(1, teatro);
+            ResultSet rs = ct.executeQuery();
+            
+            while(rs.next()){
+                producciones.add(new String[]{rs.getString(1), rs.getString(2)});
+            }
+    
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return producciones;
+    }
+    
+    
+    public static ArrayList<Object[]> selectFechasProdu(String teatro, String produ){
+        ArrayList<Object[]> fechas = new ArrayList<>();
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSfechasProdu ?, ?");
+            ct.setString(1, teatro);
+            ct.setString(2, produ);
+            ResultSet rs = ct.executeQuery();
+            
+            while(rs.next()){
+                fechas.add(new Object[]{rs.getDate(1), rs.getTime(2)});
+                
+            }
+    
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return fechas;
+    }
+    
+    
     /* Plantilla 
     
     public static boolean name()throws SQLException{

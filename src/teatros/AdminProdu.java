@@ -8,7 +8,9 @@ package teatros;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,19 +18,29 @@ import javax.swing.JFrame;
  */
 public class AdminProdu extends javax.swing.JFrame {
     JFrame principal;
+    ArrayList<String[]> producciones = new ArrayList<>();
+    ArrayList<ArrayList<Object[]>> fechas = new ArrayList<>();
+    
+    DefaultTableModel modFechas, modPrecios;
+    
     public WindowListener c = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
             cerrar();
         }
     };  
+    
     /**
      * Creates new form IncluirAgente
+     * @param p
      */
     public AdminProdu(JFrame p) {
         initComponents();
         TeatroLabel.setText(Teatros.Teatro);
         principal = p;
+        modFechas = (DefaultTableModel) tablaFechas.getModel();
+        modPrecios = (DefaultTableModel) tablaPrecios.getModel();
+        leerDatos();
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -37,6 +49,19 @@ public class AdminProdu extends javax.swing.JFrame {
     void cerrar(){
         this.dispose();
         principal.setVisible(true);
+    }
+    
+    void leerDatos(){
+        
+        producciones = Teatros.selectProduc(Teatros.Teatro);
+        ArrayList<Object[]> fecha;
+        
+        for(String[] prod : producciones){
+            fecha = Teatros.selectFechasProdu(Teatros.Teatro, prod[0]);
+            fechas.add(fecha);
+            
+            comboProdu.addItem(prod[0]);
+        }
     }
 
     /**
@@ -51,19 +76,35 @@ public class AdminProdu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         TeatroLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        comboProdu = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaPrecios = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        bEstado = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaFechas = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        bFecha = new javax.swing.JButton();
+        cEstado = new javax.swing.JComboBox<>();
+        bPrecios = new javax.swing.JButton();
+        bVolver = new javax.swing.JButton();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Administrar Producción");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 51));
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 40)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Administrar  Producciones");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 30, 690, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 30, 700, -1));
 
         TeatroLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         TeatroLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -71,10 +112,175 @@ public class AdminProdu extends javax.swing.JFrame {
         TeatroLabel.setText("<Teatro>");
         jPanel1.add(TeatroLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 690, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 750));
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Estado :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 220, 30));
+
+        comboProdu.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        comboProdu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboProduActionPerformed(evt);
+            }
+        });
+        jPanel1.add(comboProdu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 420, 40));
+
+        tablaPrecios.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tablaPrecios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Bloque", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaPrecios.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaPrecios);
+        if (tablaPrecios.getColumnModel().getColumnCount() > 0) {
+            tablaPrecios.getColumnModel().getColumn(0).setResizable(false);
+            tablaPrecios.getColumnModel().getColumn(0).setPreferredWidth(175);
+            tablaPrecios.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 420, 120));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 26)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Producción :");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 220, 40));
+
+        bEstado.setBackground(new java.awt.Color(51, 51, 51));
+        bEstado.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        bEstado.setForeground(new java.awt.Color(255, 255, 255));
+        bEstado.setText("Guardar estado");
+        bEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEstadoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 590, 200, 60));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Fechas :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 260, 220, 40));
+
+        tablaFechas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tablaFechas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaFechas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaFechas);
+        if (tablaFechas.getColumnModel().getColumnCount() > 0) {
+            tablaFechas.getColumnModel().getColumn(0).setResizable(false);
+            tablaFechas.getColumnModel().getColumn(0).setPreferredWidth(175);
+            tablaFechas.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 420, 120));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Precios :");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 220, 30));
+
+        bFecha.setBackground(new java.awt.Color(51, 51, 51));
+        bFecha.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        bFecha.setForeground(new java.awt.Color(255, 255, 255));
+        bFecha.setText("Agregar Fecha");
+        bFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFechaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 200, 60));
+
+        cEstado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "confidencial", "adelantada", "anunciada", "abierta", "cancelada", "concluida" }));
+        jPanel1.add(cEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 600, 200, 40));
+
+        bPrecios.setBackground(new java.awt.Color(51, 51, 51));
+        bPrecios.setFont(new java.awt.Font("Dialog", 1, 21)); // NOI18N
+        bPrecios.setForeground(new java.awt.Color(255, 255, 255));
+        bPrecios.setText("Cambiar Precios");
+        bPrecios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bPreciosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bPrecios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 200, 60));
+
+        bVolver.setBackground(new java.awt.Color(51, 51, 51));
+        bVolver.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        bVolver.setForeground(new java.awt.Color(255, 255, 255));
+        bVolver.setText("Volver");
+        bVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 680, 250, 70));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 780));
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoAdminProd.png"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 780));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProduActionPerformed
+        int indice = comboProdu.getSelectedIndex();
+        ArrayList<Object[]> fecha = fechas.get(indice);
+        cEstado.setSelectedItem(producciones.get(indice)[1]);
+        
+        for(Object[] f : fecha){
+            modFechas.addRow(f);
+        }
+    }//GEN-LAST:event_comboProduActionPerformed
+
+    private void bFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFechaActionPerformed
+        new AgregarFecha(this, comboProdu.getSelectedItem().toString());
+        this.setVisible(false);
+    }//GEN-LAST:event_bFechaActionPerformed
+
+    private void bPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPreciosActionPerformed
+        new CambiarPrecios(this, comboProdu.getSelectedItem().toString());
+        this.setVisible(false);
+    }//GEN-LAST:event_bPreciosActionPerformed
+
+    private void bEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bEstadoActionPerformed
+
+    private void bVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolverActionPerformed
+        cerrar();
+    }//GEN-LAST:event_bVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,8 +318,23 @@ public class AdminProdu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
     private javax.swing.JLabel TeatroLabel;
+    private javax.swing.JButton bEstado;
+    private javax.swing.JButton bFecha;
+    private javax.swing.JButton bPrecios;
+    private javax.swing.JButton bVolver;
+    private javax.swing.JComboBox<String> cEstado;
+    private javax.swing.JComboBox<String> comboProdu;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaFechas;
+    private javax.swing.JTable tablaPrecios;
     // End of variables declaration//GEN-END:variables
 }
