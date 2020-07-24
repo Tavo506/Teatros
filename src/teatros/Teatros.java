@@ -397,7 +397,7 @@ public class Teatros {
     }
     
     
-    public static boolean updateEstado(String teatro, String obra, String estado)throws SQLException{
+    public static void updateEstado(String teatro, String obra, String estado){
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPUestadoProdu ?,?,?");
             ct.setString(1, teatro);
@@ -405,10 +405,23 @@ public class Teatros {
             ct.setString(3, estado);
             ct.executeUpdate();
     
-            return true;
         }catch (SQLException e){
             System.err.println(e.getMessage());
-            return false;
+        }
+    }
+    
+    
+    public static void updatePrecio(String teatro, String obra, String bloque, int precio){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPUprecioProdu ?,?,?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, obra);
+            ct.setString(3, bloque);
+            ct.setInt(4, precio);
+            ct.executeUpdate();
+    
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
         }
     }
     

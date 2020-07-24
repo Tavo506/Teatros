@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,6 +26,7 @@ public class AdminProdu extends javax.swing.JFrame {
     ArrayList<ArrayList<Object[]>> precios = new ArrayList<>();
     boolean first = true;
     int indice;
+    String accion;
     
     DefaultTableModel modFechas, modPrecios;
     
@@ -59,13 +61,31 @@ public class AdminProdu extends javax.swing.JFrame {
             if(first){
                 first = false;
             }else{
-                Object[] obj = Teatros.getBuffer();
                 
-                if(obj != null){
-                    modFechas.addRow(obj);
-                    fechas.get(indice).add(obj);
-                    Teatros.nullBuffer();
+                Object[] obj = Teatros.getBuffer();
+                if(accion.equals("fecha")){
+
+                    if(obj != null){
+                        modFechas.addRow(obj);
+                        fechas.get(indice).add(obj);
+                        Teatros.nullBuffer();
+                    }
                 }
+                
+                else if(accion.equals("precio")){
+                    
+                    if(obj != null){
+
+                        ArrayList<Object[]> precio = Teatros.selectPreciosProdu(Teatros.Teatro, producciones.get(indice)[0]);
+                        precios.set(indice, precio);
+                        
+                        modPrecios.setRowCount(0);
+                        for(Object[] p : precio){
+                            modPrecios.addRow(p);
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -161,7 +181,7 @@ public class AdminProdu extends javax.swing.JFrame {
         });
         jPanel1.add(comboProdu, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 420, 40));
 
-        tablaPrecios.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tablaPrecios.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         tablaPrecios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -178,6 +198,7 @@ public class AdminProdu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaPrecios.setRowHeight(22);
         tablaPrecios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaPrecios);
         if (tablaPrecios.getColumnModel().getColumnCount() > 0) {
@@ -228,6 +249,7 @@ public class AdminProdu extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaFechas.setRowHeight(20);
         tablaFechas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaFechas);
         if (tablaFechas.getColumnModel().getColumnCount() > 0) {
@@ -310,17 +332,29 @@ public class AdminProdu extends javax.swing.JFrame {
 
     private void bFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFechaActionPerformed
         indice = comboProdu.getSelectedIndex();
+        accion = "fecha";
         new AgregarFecha(this, comboProdu.getSelectedItem().toString(), fechas.get(indice));
         this.setVisible(false);
     }//GEN-LAST:event_bFechaActionPerformed
 
     private void bPreciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPreciosActionPerformed
-        new CambiarPrecios(this, comboProdu.getSelectedItem().toString());
+        indice = comboProdu.getSelectedIndex();
+        accion = "precio";
+        new CambiarPrecios(this, comboProdu.getSelectedItem().toString(), precios.get(indice));
         this.setVisible(false);
     }//GEN-LAST:event_bPreciosActionPerformed
 
     private void bEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEstadoActionPerformed
-        // TODO add your handling code here:
+        String estado = cEstado.getSelectedItem().toString();
+        indice = comboProdu.getSelectedIndex();
+        String produ = comboProdu.getSelectedItem().toString();
+        
+        Teatros.updateEstado(Teatros.Teatro, produ, estado);
+        
+        JOptionPane.showMessageDialog(this, "Estado cambiado", "Advertencia", 1);
+        
+        producciones.get(indice)[1] = estado;
+        
     }//GEN-LAST:event_bEstadoActionPerformed
 
     private void bVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVolverActionPerformed

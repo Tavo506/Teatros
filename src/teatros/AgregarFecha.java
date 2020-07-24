@@ -75,12 +75,14 @@ public class AgregarFecha extends javax.swing.JFrame {
         tAnno = new javax.swing.JTextField();
         tMes = new javax.swing.JTextField();
         tDia = new javax.swing.JTextField();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Fechas");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 0));
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 40)); // NOI18N
@@ -149,6 +151,9 @@ public class AgregarFecha extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoCrearPresent.png"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -216,6 +221,7 @@ public class AgregarFecha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
     private javax.swing.JButton bGuardar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
