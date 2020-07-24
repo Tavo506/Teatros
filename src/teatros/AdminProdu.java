@@ -5,6 +5,8 @@
  */
 package teatros;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -20,6 +22,9 @@ public class AdminProdu extends javax.swing.JFrame {
     JFrame principal;
     ArrayList<String[]> producciones = new ArrayList<>();
     ArrayList<ArrayList<Object[]>> fechas = new ArrayList<>();
+    ArrayList<ArrayList<Object[]>> precios = new ArrayList<>();
+    boolean first = true;
+    int indice;
     
     DefaultTableModel modFechas, modPrecios;
     
@@ -44,6 +49,32 @@ public class AdminProdu extends javax.swing.JFrame {
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
+        this.addComponentListener ( new ComponentAdapter ()
+    {
+        
+        @Override
+        public void componentShown ( ComponentEvent e )
+        {
+            if(first){
+                first = false;
+            }else{
+                Object[] obj = Teatros.getBuffer();
+                
+                if(obj != null){
+                    modFechas.addRow(obj);
+                    fechas.get(indice).add(obj);
+                    Teatros.nullBuffer();
+                }
+            }
+        }
+
+        @Override
+        public void componentHidden ( ComponentEvent e )
+        {
+            
+        }
+    } );
     }
     
     void cerrar(){
@@ -51,14 +82,18 @@ public class AdminProdu extends javax.swing.JFrame {
         principal.setVisible(true);
     }
     
-    void leerDatos(){
+    public void leerDatos(){
         
         producciones = Teatros.selectProduc(Teatros.Teatro);
         ArrayList<Object[]> fecha;
+        ArrayList<Object[]> precio;
         
         for(String[] prod : producciones){
             fecha = Teatros.selectFechasProdu(Teatros.Teatro, prod[0]);
             fechas.add(fecha);
+            
+            precio = Teatros.selectPreciosProdu(Teatros.Teatro, prod[0]);
+            precios.add(precio);
             
             comboProdu.addItem(prod[0]);
         }
@@ -256,16 +291,26 @@ public class AdminProdu extends javax.swing.JFrame {
 
     private void comboProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProduActionPerformed
         int indice = comboProdu.getSelectedIndex();
+        
         ArrayList<Object[]> fecha = fechas.get(indice);
+        ArrayList<Object[]> precio = precios.get(indice);
+        
         cEstado.setSelectedItem(producciones.get(indice)[1]);
+        
+        modFechas.setRowCount(0);
+        modPrecios.setRowCount(0);
         
         for(Object[] f : fecha){
             modFechas.addRow(f);
         }
+        for(Object[] p : precio){
+            modPrecios.addRow(p);
+        }
     }//GEN-LAST:event_comboProduActionPerformed
 
     private void bFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFechaActionPerformed
-        new AgregarFecha(this, comboProdu.getSelectedItem().toString());
+        indice = comboProdu.getSelectedIndex();
+        new AgregarFecha(this, comboProdu.getSelectedItem().toString(), fechas.get(indice));
         this.setVisible(false);
     }//GEN-LAST:event_bFechaActionPerformed
 

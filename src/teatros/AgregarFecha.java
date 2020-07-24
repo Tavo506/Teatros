@@ -8,15 +8,21 @@ package teatros;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Admin
  */
 public class AgregarFecha extends javax.swing.JFrame {
-
     JFrame principal;
+    String obra;
+    
     public WindowListener c = new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
@@ -25,17 +31,26 @@ public class AgregarFecha extends javax.swing.JFrame {
     };  
     /**
      * Creates new form IncluirAgente
+     * @param p
+     * @param produ
+     * @param fecha
      */
-    public AgregarFecha(JFrame p, String produ) {
+    public AgregarFecha(JFrame p, String produ, ArrayList<Object[]> fecha) {
         initComponents();
-        //TeatroLabel.setText(Teatros.Teatro);
         principal = p;
+        obra = produ;
+        DefaultTableModel modelo = (DefaultTableModel)tablaFechas.getModel();
+        for(Object[] f : fecha){
+            modelo.addRow(f);
+        }
+        
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
     void cerrar(){
+        
         this.dispose();
         principal.setVisible(true);
     }
@@ -50,36 +65,120 @@ public class AgregarFecha extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaFechas = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        bGuardar = new javax.swing.JButton();
+        sHora = new javax.swing.JSpinner();
+        tAnno = new javax.swing.JTextField();
+        tMes = new javax.swing.JTextField();
+        tDia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Agregar Fechas");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-        );
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 40)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Agregar Nueva Presentación");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 600, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        tablaFechas.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        tablaFechas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Fecha", "Hora"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaFechas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaFechas);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 420, 120));
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Hora :");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 340, 160, 40));
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Fecha :");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 160, 40));
+
+        bGuardar.setBackground(new java.awt.Color(51, 51, 51));
+        bGuardar.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        bGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        bGuardar.setText("Guardar");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(bGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+
+        sHora.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        sHora.setModel(new javax.swing.SpinnerListModel(new String[] {"01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00"}));
+        jPanel1.add(sHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 110, 40));
+
+        tAnno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 60, 30));
+
+        tMes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 40, 30));
+
+        tDia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 40, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        String dia, mes, anno;
+        Date fecha;
+        Time hora;
+        
+        dia = tDia.getText();
+        mes = tMes.getText();
+        anno = tAnno.getText();
+        
+        hora = Time.valueOf(sHora.getValue().toString() + ":00");
+        
+        try{
+            fecha = Date.valueOf(anno + "-" + mes + "-" + dia);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Fecha inválida", "Advertencia", 0);
+            return;
+        }
+        
+        if(!Teatros.insertPresentacion(Teatros.Teatro, obra, fecha, hora)){
+            JOptionPane.showMessageDialog(this, "Esta presentación ya existe", "Advertencia", 0);
+            return;
+        }
+        
+        JOptionPane.showMessageDialog(this, "Presentación agregada", "Info", 1);
+        Teatros.setBuffer(new Object[]{fecha, hora});
+        cerrar();
+    }//GEN-LAST:event_bGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -111,12 +210,22 @@ public class AgregarFecha extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AgregarFecha(null, null).setVisible(true);
+                new AgregarFecha(null, null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bGuardar;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner sHora;
+    private javax.swing.JTextField tAnno;
+    private javax.swing.JTextField tDia;
+    private javax.swing.JTextField tMes;
+    private javax.swing.JTable tablaFechas;
     // End of variables declaration//GEN-END:variables
 }

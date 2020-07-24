@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ import javax.swing.JOptionPane;
 public class Teatros {
     public static Connection con;
     public static String User, Password, Tipo, Teatro;
+    public static Object[] buffer;
 
     /**
      * @param args the command line arguments
@@ -70,6 +72,21 @@ public class Teatros {
         }
         return resultado;
     }
+    
+    //Buffer Controller
+    public static Object[] getBuffer(){
+        return buffer;
+    }
+    
+    public static void setBuffer(Object[] obj){
+        buffer = obj;
+    }
+    
+    public static void nullBuffer(){
+        buffer = null;
+    }
+    
+    
     
     private static String getTipo(String user){
         String tipo = null;
@@ -340,6 +357,59 @@ public class Teatros {
             System.err.println(e.getMessage());
         }
         return fechas;
+    }
+    
+    
+    public static ArrayList<Object[]> selectPreciosProdu(String teatro, String produ){
+        ArrayList<Object[]> fechas = new ArrayList<>();
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSprecioProdu ?, ?");
+            ct.setString(1, teatro);
+            ct.setString(2, produ);
+            ResultSet rs = ct.executeQuery();
+            
+            while(rs.next()){
+                fechas.add(new Object[]{rs.getString(1), rs.getInt(2)});
+                
+            }
+    
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return fechas;
+    }
+    
+    
+    public static boolean insertPresentacion(String teatro, String obra, Date fecha, Time hora){
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPIPresentacion ?,?,?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, obra);
+            ct.setDate(3, fecha);
+            ct.setTime(4, hora);
+            ct.executeUpdate();
+    
+            return true;
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
+    }
+    
+    
+    public static boolean updateEstado(String teatro, String obra, String estado)throws SQLException{
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPUestadoProdu ?,?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, obra);
+            ct.setString(3, estado);
+            ct.executeUpdate();
+    
+            return true;
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+            return false;
+        }
     }
     
     

@@ -251,7 +251,7 @@ public class IncluirAdmin extends javax.swing.JFrame {
 
         tAnno.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tAnno.setText("2001");
-        jPanel1.add(tAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 50, 30));
+        jPanel1.add(tAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 60, 30));
 
         tMes.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         tMes.setText("02");
