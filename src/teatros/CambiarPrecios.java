@@ -69,12 +69,14 @@ public class CambiarPrecios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaPrecios = new javax.swing.JTable();
         bGuardar = new javax.swing.JButton();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Cambiar Precios");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 0));
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(600, 500));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -130,6 +132,9 @@ public class CambiarPrecios extends javax.swing.JFrame {
         jPanel1.add(bGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoCambPrecios.png"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,6 +197,7 @@ public class CambiarPrecios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
     private javax.swing.JButton bGuardar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
