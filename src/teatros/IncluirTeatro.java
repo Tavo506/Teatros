@@ -86,6 +86,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaBloques = new javax.swing.JTable();
         PanelDatos = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -97,6 +98,7 @@ public class IncluirTeatro extends javax.swing.JFrame {
         tTelefono = new javax.swing.JTextField();
         tCorreo = new javax.swing.JTextField();
         tWeb = new javax.swing.JTextField();
+        tBoleteria = new javax.swing.JTextField();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -155,7 +157,6 @@ public class IncluirTeatro extends javax.swing.JFrame {
             tablaFilas.getColumnModel().getColumn(0).setResizable(false);
             tablaFilas.getColumnModel().getColumn(1).setResizable(false);
             tablaFilas.getColumnModel().getColumn(2).setResizable(false);
-            tablaFilas.getColumnModel().getColumn(2).setCellEditor(null);
         }
 
         PanelFilas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, -1));
@@ -266,35 +267,41 @@ public class IncluirTeatro extends javax.swing.JFrame {
         PanelDatos.setPreferredSize(new java.awt.Dimension(700, 600));
         PanelDatos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Tel Boletería :");
+        PanelDatos.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 200, 40));
+
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Nombre :");
-        PanelDatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 200, 40));
+        PanelDatos.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 200, 40));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Dirección :");
-        PanelDatos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 200, 40));
+        PanelDatos.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 200, 40));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Teléfono :");
-        PanelDatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 200, 40));
+        PanelDatos.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 200, 40));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Correo :");
-        PanelDatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 200, 40));
+        PanelDatos.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 200, 40));
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Sitio web :");
-        PanelDatos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 200, 40));
+        PanelDatos.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 200, 40));
 
         BSiguiente.setBackground(new java.awt.Color(51, 51, 51));
         BSiguiente.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
@@ -305,22 +312,25 @@ public class IncluirTeatro extends javax.swing.JFrame {
                 BSiguienteActionPerformed(evt);
             }
         });
-        PanelDatos.add(BSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, -1, -1));
+        PanelDatos.add(BSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, -1, -1));
 
         tNombre.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        PanelDatos.add(tNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, 420, 40));
+        PanelDatos.add(tNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 420, 40));
 
         tDireccion.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        PanelDatos.add(tDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 420, 40));
+        PanelDatos.add(tDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 420, 40));
 
         tTelefono.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        PanelDatos.add(tTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 130, 40));
+        PanelDatos.add(tTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, 40));
 
         tCorreo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        PanelDatos.add(tCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 420, 40));
+        PanelDatos.add(tCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 420, 40));
 
         tWeb.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        PanelDatos.add(tWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 420, 40));
+        PanelDatos.add(tWeb, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, 420, 40));
+
+        tBoleteria.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        PanelDatos.add(tBoleteria, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 390, 130, 40));
 
         getContentPane().add(PanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
@@ -331,15 +341,16 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BSiguienteActionPerformed
-        String nombre, direccion, telefono, correo, web;
+        String nombre, direccion, telefono, correo, web, boleteria;
         
         nombre = tNombre.getText();
         direccion = tDireccion.getText();
         telefono = tTelefono.getText();
         correo = tCorreo.getText();
         web = tWeb.getText();
+        boleteria = tBoleteria.getText();
         
-        if(revisarDatos(nombre, direccion, telefono, correo, web)){
+        if(revisarDatos(nombre, direccion, telefono, correo, web, boleteria)){
             
             if(Teatros.revisaTeatro(this, nombre, direccion, Integer.parseInt(telefono), correo, web)){
                 PanelDatos.setVisible(false);
@@ -351,12 +362,15 @@ public class IncluirTeatro extends javax.swing.JFrame {
     }//GEN-LAST:event_BSiguienteActionPerformed
 
     
-    boolean revisarDatos(String nombre, String direccion, String telefono, String correo, String web){
-        if(nombre.trim().isEmpty() || direccion.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || web.trim().isEmpty()){
+    boolean revisarDatos(String nombre, String direccion, String telefono, String correo, String web, String boleteria){
+        if(nombre.trim().isEmpty() || direccion.trim().isEmpty() || telefono.trim().isEmpty() || correo.trim().isEmpty() || web.trim().isEmpty() || boleteria.trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "Debe llenar todos los datos", "Advertencia", 0);
         
         }else if(!(telefono.length() == 8 && Teatros.isNumeric(telefono))){
             JOptionPane.showMessageDialog(this, "Teléfono inválido", "Advertencia",0);
+        
+        }else if(!(boleteria.length() == 8 && Teatros.isNumeric(boleteria))){
+            JOptionPane.showMessageDialog(this, "Teléfono de boletería inválido", "Advertencia",0);    
             
         }else{
             return true;
@@ -500,10 +514,12 @@ public class IncluirTeatro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner sFilas;
     private javax.swing.JTextField tBloque;
+    private javax.swing.JTextField tBoleteria;
     private javax.swing.JTextField tCorreo;
     private javax.swing.JTextField tDireccion;
     private javax.swing.JTextField tNombre;
