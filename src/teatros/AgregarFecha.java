@@ -9,6 +9,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -44,6 +45,8 @@ public class AgregarFecha extends javax.swing.JFrame {
             modelo.addRow(f);
         }
         
+        verFechas();
+        
         this.addWindowListener(c);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
@@ -53,6 +56,13 @@ public class AgregarFecha extends javax.swing.JFrame {
         
         this.dispose();
         principal.setVisible(true);
+    }
+    
+    void verFechas(){
+        String[] fechas = Teatros.selectFechas(Teatros.Teatro, obra);
+        
+        FechaI.setText("Inicio : " + fechas[0]);
+        FechaF.setText("Fechas : " + fechas[1]);
     }
 
     /**
@@ -75,6 +85,8 @@ public class AgregarFecha extends javax.swing.JFrame {
         tAnno = new javax.swing.JTextField();
         tMes = new javax.swing.JTextField();
         tDia = new javax.swing.JTextField();
+        FechaF = new javax.swing.JLabel();
+        FechaI = new javax.swing.JLabel();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -111,7 +123,7 @@ public class AgregarFecha extends javax.swing.JFrame {
         tablaFechas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaFechas);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 420, 120));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 420, 120));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,6 +161,16 @@ public class AgregarFecha extends javax.swing.JFrame {
         tDia.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jPanel1.add(tDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 40, 30));
 
+        FechaF.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        FechaF.setForeground(new java.awt.Color(255, 255, 255));
+        FechaF.setText("Fin :");
+        jPanel1.add(FechaF, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, -1, -1));
+
+        FechaI.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        FechaI.setForeground(new java.awt.Color(255, 255, 255));
+        FechaI.setText("Inicio :");
+        jPanel1.add(FechaI, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/FondoCrearPresent.png"))); // NOI18N
@@ -175,8 +197,13 @@ public class AgregarFecha extends javax.swing.JFrame {
             return;
         }
         
-        if(!Teatros.insertPresentacion(Teatros.Teatro, obra, fecha, hora)){
-            JOptionPane.showMessageDialog(this, "Esta presentación ya existe", "Advertencia", 0);
+        try{
+            Teatros.insertPresentacion(Teatros.Teatro, obra, fecha, hora);
+        }catch(SQLException e){
+            if(e.getMessage().equals("La fecha debe ser en el periodo en que estará la producción"))
+                JOptionPane.showMessageDialog(this, "La fecha debe ser en el periodo en\nque estará la producción", "Advertencia", 0);
+            else
+                JOptionPane.showMessageDialog(this, "Esta presentación ya existe", "Advertencia", 0);
             return;
         }
         
@@ -221,6 +248,8 @@ public class AgregarFecha extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FechaF;
+    private javax.swing.JLabel FechaI;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton bGuardar;
     private javax.swing.JLabel jLabel2;

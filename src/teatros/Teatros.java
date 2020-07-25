@@ -304,7 +304,7 @@ public class Teatros {
         }
     }
     
-    public static boolean insertProduccion(JFrame p, String teatro, String obra, String detalles, String tipo, String estado)throws SQLException{
+    public static boolean insertProduccion(JFrame p, String teatro, String obra, String detalles, String tipo, String estado, Date fechaI, Date fehcaF)throws SQLException{
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPIProduccion ?,?,?,?,?");
             ct.setString(1, teatro);
@@ -380,7 +380,7 @@ public class Teatros {
     }
     
     
-    public static boolean insertPresentacion(String teatro, String obra, Date fecha, Time hora){
+    public static boolean insertPresentacion(String teatro, String obra, Date fecha, Time hora)throws SQLException{
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPIPresentacion ?,?,?,?");
             ct.setString(1, teatro);
@@ -392,7 +392,7 @@ public class Teatros {
             return true;
         }catch (SQLException e){
             System.err.println(e.getMessage());
-            return false;
+            throw e;
         }
     }
     
@@ -425,6 +425,23 @@ public class Teatros {
         }
     }
     
+    public static String[] selectFechas(String teatro, String obra){
+        String[] fechas = null;
+        try{
+            PreparedStatement ct = con.prepareStatement("EXEC SPSlimFechas ?,?");
+            ct.setString(1, teatro);
+            ct.setString(2, obra);
+            ResultSet rs = ct.executeQuery();
+            
+            rs.next();
+            
+            fechas = new String[]{rs.getDate(1).toString(), rs.getDate(2).toString()};
+    
+        }catch (SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return fechas;
+    }
     
     /* Plantilla 
     

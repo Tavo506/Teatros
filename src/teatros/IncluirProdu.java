@@ -8,6 +8,7 @@ package teatros;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -63,6 +64,14 @@ public class IncluirProdu extends javax.swing.JFrame {
         bCrearProdu = new javax.swing.JButton();
         cEstado = new javax.swing.JComboBox<>();
         cTipo = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        tDiaIn = new javax.swing.JTextField();
+        tMesIn = new javax.swing.JTextField();
+        tAnnoIn = new javax.swing.JTextField();
+        tDiaFin = new javax.swing.JTextField();
+        tMesFin = new javax.swing.JTextField();
+        tAnnoFin = new javax.swing.JTextField();
         Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -89,27 +98,27 @@ public class IncluirProdu extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Nombre :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 180, 210, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 210, -1));
 
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Estado :");
         jLabel5.setToolTipText("");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, 210, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 210, -1));
 
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Descripción :");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 210, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 210, -1));
 
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel7.setText("Tipo :");
+        jLabel7.setText("Fin :");
         jLabel7.setToolTipText("");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 210, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 520, 100, -1));
 
         tDesc.setColumns(20);
         tDesc.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -117,10 +126,10 @@ public class IncluirProdu extends javax.swing.JFrame {
         tDesc.setRows(5);
         jScrollPane1.setViewportView(tDesc);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 350, 110));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 240, 350, 110));
 
         tNombre.setFont(new java.awt.Font("Dialog", 1, 20)); // NOI18N
-        jPanel1.add(tNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 180, 350, 40));
+        jPanel1.add(tNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 350, 40));
 
         bCrearProdu.setBackground(new java.awt.Color(51, 51, 51));
         bCrearProdu.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
@@ -135,11 +144,43 @@ public class IncluirProdu extends javax.swing.JFrame {
 
         cEstado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         cEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Confidencial", "Adelantada", "Anunciada", "Abierta" }));
-        jPanel1.add(cEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 470, 190, 40));
+        jPanel1.add(cEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 190, 40));
 
         cTipo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         cTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Danza", "Música", "Teatro", "Otros" }));
-        jPanel1.add(cTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 190, 40));
+        jPanel1.add(cTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 190, 40));
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Tipo :");
+        jLabel8.setToolTipText("");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 210, -1));
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("Inicio :");
+        jLabel9.setToolTipText("");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 100, -1));
+
+        tDiaIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tDiaIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 530, 40, 30));
+
+        tMesIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tMesIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 40, 30));
+
+        tAnnoIn.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tAnnoIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 530, 60, 30));
+
+        tDiaFin.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tDiaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 530, 40, 30));
+
+        tMesFin.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tMesFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, 40, 30));
+
+        tAnnoFin.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jPanel1.add(tAnnoFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 530, 60, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 725));
 
@@ -151,19 +192,50 @@ public class IncluirProdu extends javax.swing.JFrame {
 
     private void bCrearProduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearProduActionPerformed
         String nombre, descripcion, tipo, estado;
+        String diaI, mesI, annoI, diaF, mesF, annoF;
+        Date fechaI = null, fechaF = null;
         
         nombre = tNombre.getText();
         descripcion = tDesc.getText();
         tipo = cTipo.getSelectedItem().toString();
         estado = cEstado.getSelectedItem().toString();
         
+        diaI = tDiaIn.getText();
+        mesI = tMesIn.getText();
+        annoI = tAnnoIn.getText();
+        
+        diaF = tDiaFin.getText();
+        mesF = tMesFin.getText();
+        annoF = tAnnoFin.getText();
+        
         if(nombre.trim().isEmpty() || descripcion.trim().isEmpty()){
             JOptionPane.showMessageDialog(this, "No deben haber campos vacíos", "Advertencia",0);
             return;
         }
         
+        
         try{
-            Teatros.insertProduccion(this, Teatros.Teatro, nombre, descripcion, tipo, estado);
+            fechaI = Date.valueOf(annoI + "-" + mesI + "-" + diaI);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Fecha de inicio inválida", "Advertencia",0);
+        }
+        
+        try{
+            fechaF = Date.valueOf(annoF + "-" + mesF + "-" + diaF);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Fecha final inválida", "Advertencia",0);
+        }
+        
+        
+        try{
+            
+        }catch(Exception e){
+            
+        }
+        
+        
+        try{
+            Teatros.insertProduccion(this, Teatros.Teatro, nombre, descripcion, tipo, estado, fechaI, fechaF);
         }catch(SQLException e){
             JOptionPane.showMessageDialog(this, "La producción ya existe", "Advertencia",0);
             return;
@@ -219,9 +291,17 @@ public class IncluirProdu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField tAnnoFin;
+    private javax.swing.JTextField tAnnoIn;
     private javax.swing.JTextArea tDesc;
+    private javax.swing.JTextField tDiaFin;
+    private javax.swing.JTextField tDiaIn;
+    private javax.swing.JTextField tMesFin;
+    private javax.swing.JTextField tMesIn;
     private javax.swing.JTextField tNombre;
     // End of variables declaration//GEN-END:variables
 }
