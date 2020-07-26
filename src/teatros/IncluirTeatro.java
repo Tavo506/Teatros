@@ -5,14 +5,12 @@
  */
 package teatros;
 
-import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -37,6 +35,8 @@ public class IncluirTeatro extends javax.swing.JFrame {
     ArrayList<Integer[]> asientosXFila = new ArrayList<>();
     ArrayList<String[]> datos = new ArrayList<>();
     int cantAsientos = 0;
+    
+    String nombreT, dirrecionT, telefonoT, correoT, webT, boleteriaT;
     
     
     /**
@@ -352,7 +352,14 @@ public class IncluirTeatro extends javax.swing.JFrame {
         
         if(revisarDatos(nombre, direccion, telefono, correo, web, boleteria)){
             
-            if(Teatros.revisaTeatro(this, nombre, direccion, Integer.parseInt(telefono), correo, web)){
+            if(Teatros.revisaTeatro(this, nombre, direccion, Integer.parseInt(telefono), correo, web, Integer.parseInt(boleteria))){
+                nombreT = nombre;
+                dirrecionT = direccion;
+                telefonoT = telefono;
+                correoT = correo;
+                webT = web;
+                boleteriaT = boleteria;
+                
                 PanelDatos.setVisible(false);
                 PanelAsientos.setVisible(true);
             }
@@ -441,10 +448,21 @@ public class IncluirTeatro extends javax.swing.JFrame {
             }
         }
         
-        
+        Guardar();
         
     }//GEN-LAST:event_GuardarActionPerformed
 
+    
+    void Guardar(){
+        if(Teatros.insertTeatrosData(nombreT, dirrecionT, telefonoT, correoT, webT, boleteriaT, cantAsientos, bloques, datos)){
+            JOptionPane.showMessageDialog(this, "Teatro guardado", "Info", 1); 
+            cerrar();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al ingresar el Teatro", "Advertencia",0);
+        }
+    }
+    
+    
     private void AgregarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarFilaActionPerformed
         int indice = ComboBloques.getSelectedIndex();
         int valor = (int) sFilas.getValue();

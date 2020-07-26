@@ -225,7 +225,7 @@ public class Teatros {
         }
     }
     
-    public static boolean revisaTeatro(JFrame p, String nombre, String direccion, int telefono, String correo, String web){
+    public static boolean revisaTeatro(JFrame p, String nombre, String direccion, int telefono, String correo, String web, int boleteria){
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPSteatros");
             ResultSet rs = ct.executeQuery();
@@ -251,6 +251,9 @@ public class Teatros {
                 }else if(web.equals(rs.getString(5))){
                     JOptionPane.showMessageDialog(p, "Sitio web del teatro ya usado", "Advertencia",0);
                     return false;
+                }else if(boleteria == rs.getInt(6)){
+                    JOptionPane.showMessageDialog(p, "Teléfono de boletería ya usado", "Advertencia",0);
+                    return false;
                 }
             }
             
@@ -261,7 +264,7 @@ public class Teatros {
         }
     }
     
-    public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, int cantidadAsientos, ArrayList<String> bloques, ArrayList<String[]> datos)throws SQLException{
+    public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, String boleteria, int cantidadAsientos, ArrayList<String> bloques, ArrayList<String[]> datos){
         try{
             PreparedStatement sT = con.prepareStatement("EXEC SPITeatro ?,?,?,?,?,?");
             sT.setString(1, nombre);
@@ -270,6 +273,7 @@ public class Teatros {
             sT.setString(4, correo);
             sT.setString(5, web);
             sT.setInt(6, cantidadAsientos);
+            sT.setInt(7, Integer.parseInt(boleteria));
             sT.executeUpdate();            
 
             insertBloques(nombre, bloques);
