@@ -81,6 +81,11 @@ public class Agente extends javax.swing.JFrame {
         IncAdminB.setToolTipText("Incluir un nuevo administrador para un teatro");
         IncAdminB.setFocusPainted(false);
         IncAdminB.setPreferredSize(new java.awt.Dimension(280, 93));
+        IncAdminB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IncAdminBActionPerformed(evt);
+            }
+        });
         Panel.add(IncAdminB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 390, 140));
 
         Cerrar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
@@ -104,6 +109,10 @@ public class Agente extends javax.swing.JFrame {
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed
+
+    private void IncAdminBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IncAdminBActionPerformed
+        new Cartelera();
+    }//GEN-LAST:event_IncAdminBActionPerformed
 
      public static void VerCartelera(Date Ini, Date Fin, DefaultTableModel Tabla)throws SQLException{
             try{
