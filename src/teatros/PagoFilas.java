@@ -36,7 +36,7 @@ public class PagoFilas extends javax.swing.JFrame {
         this.titulo = produ;
         initComponents();
         DefaultTableModel modelo = (DefaultTableModel) TablaFilas.getModel();
-        Agente.CargaFilas(Teatro, Bloque, titulo ,  modelo);
+        ClienteTeatro.CargaFilas(Teatro, Bloque, titulo ,  modelo);
         TituloPago.setText(Titulo);
         CostoField.setText(Integer.toString(precio));
         //if(!ClienteTeatro.flag){
@@ -70,7 +70,6 @@ public class PagoFilas extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         CVVField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        efectivo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -86,7 +85,7 @@ public class PagoFilas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Filas", "Asientos Disponibles"
+                "Filas", "Asientos Disponibles", "Asientos Totales"
             }
         ));
         TablaFilas.setRowHeight(50);
@@ -143,15 +142,6 @@ public class PagoFilas extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, -1, -1));
 
-        efectivo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        efectivo.setText("Efectivo 💵");
-        efectivo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                efectivoActionPerformed(evt);
-            }
-        });
-        getContentPane().add(efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 440, -1, -1));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,7 +173,7 @@ public class PagoFilas extends javax.swing.JFrame {
                     
                     int numReg = aleatorio.nextInt(1000000);
                     InetAddress inetAddress = InetAddress. getLocalHost();
-                   new Asientos(cantidadCompra, numReg, Bloque, teatro, titulo,TablaFilas.getValueAt(TablaFilas.getSelectedRow(),0).toString(), inetAddress.getHostAddress(), Integer.parseInt(CostoField.getText()));
+                   new Asientos(cantidadCompra, numReg, Bloque, teatro, titulo,TablaFilas.getValueAt(TablaFilas.getSelectedRow(),0).toString(), inetAddress.getHostAddress(), Integer.parseInt(CostoField.getText()), TablaFilas.getValueAt(TablaFilas.getSelectedRow(),2).toString());
                 
                 }
          
@@ -204,23 +194,6 @@ public class PagoFilas extends javax.swing.JFrame {
         this.cantidad  = Integer.parseInt(CantidadSpinner.getValue().toString());
         CostoField.setText(Integer.toString(cantidad*precio));
     }//GEN-LAST:event_CantidadSpinnerStateChanged
-
-    private void efectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectivoActionPerformed
-                        
-            try{
-                int cantidadCompra = Integer.parseInt(CantidadSpinner.getValue().toString());
-                int cantidadDisponible = Integer.parseInt(TablaFilas.getValueAt(TablaFilas.getSelectedRow(), 1).toString());
-                int numReg = aleatorio.nextInt(1000000);
-                if(cantidadCompra>cantidadDisponible){
-                    JOptionPane.showMessageDialog(this, "Hijole creo que no se va a poder", "Faltan asientos",0);
-                }
-                else{
-                    InetAddress inetAddress = InetAddress. getLocalHost();
-                   new Asientos(Integer.parseInt(CantidadSpinner.getValue().toString()), numReg, Bloque, teatro, titulo,TablaFilas.getValueAt(TablaFilas.getSelectedRow(),0).toString(), inetAddress.getHostAddress(), Integer.parseInt(CostoField.getText()));
-            } }catch (UnknownHostException ex) {
-                Logger.getLogger(PagoFilas.class.getName()).log(Level.SEVERE, null, ex);
-            }
-    }//GEN-LAST:event_efectivoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,7 +238,6 @@ public class PagoFilas extends javax.swing.JFrame {
     private javax.swing.JTable TablaFilas;
     private javax.swing.JTextField TarjetaNumField;
     private javax.swing.JLabel TituloPago;
-    private javax.swing.JButton efectivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;

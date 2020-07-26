@@ -150,7 +150,7 @@ public class Agente extends javax.swing.JFrame {
                     String FechaHora = Bloques.TablaBloques.getValueAt(Bloques.TablaBloques.getSelectedRow(), 0).toString();
                     String fecha = FechaHora.split("    -    ")[0];
                     String hora = FechaHora.split("    -    ")[1];
-                    Tabla.addRow(new Object[]{rs.getString(1), Integer.parseInt(rs.getString(2))-CuentaAsiento(Teatro, obra, Bloque, rs.getString(1), fecha, hora)});
+                    Tabla.addRow(new Object[]{rs.getString(1), Integer.parseInt(rs.getString(2))-CuentaAsiento(Teatro, obra, Bloque, rs.getString(1), fecha, hora), rs.getString(2)});
 
                 }
             }catch(SQLException e){
