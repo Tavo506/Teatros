@@ -135,22 +135,22 @@ public class PagoFilas extends javax.swing.JFrame {
         getContentPane().add(CVVField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 50, -1));
 
         efectivo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        efectivo.setText("Pagar ?");
+        efectivo.setText("Pago Efectivo");
         efectivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 efectivoActionPerformed(evt);
             }
         });
-        getContentPane().add(efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, -1, -1));
+        getContentPane().add(efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, -1, -1));
 
         jButton1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton1.setText("Pagar ?");
+        jButton1.setText("Pago Tarjeta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 440, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

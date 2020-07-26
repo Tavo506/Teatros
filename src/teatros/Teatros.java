@@ -266,7 +266,7 @@ public class Teatros {
     
     public static boolean insertTeatrosData(String nombre, String direccion, String telefono, String correo, String web, String boleteria, int cantidadAsientos, ArrayList<String> bloques, ArrayList<String[]> datos){
         try{
-            PreparedStatement sT = con.prepareStatement("EXEC SPITeatro ?,?,?,?,?,?");
+            PreparedStatement sT = con.prepareStatement("EXEC SPITeatro ?,?,?,?,?,?,?");
             sT.setString(1, nombre);
             sT.setString(2, direccion);
             sT.setInt(3, Integer.parseInt(telefono));
@@ -308,11 +308,11 @@ public class Teatros {
             ct.setString(1, teatro);
             
             for(String[] dato : datos){
-                ct.setString(1, dato[0]);
-                ct.setString(2, dato[1]);
-                ct.setInt(3, Integer.parseInt(dato[2]));
+                ct.setString(2, dato[0]);
+                ct.setString(3, dato[1]);
+                ct.setInt(4, Integer.parseInt(dato[2]));
                 
-                ct.executeQuery();
+                ct.executeUpdate();
             }
 
         }catch (SQLException e){
@@ -322,12 +322,14 @@ public class Teatros {
     
     public static boolean insertProduccion(JFrame p, String teatro, String obra, String detalles, String tipo, String estado, Date fechaI, Date fehcaF)throws SQLException{
         try{
-            PreparedStatement ct = con.prepareStatement("EXEC SPIProduccion ?,?,?,?,?");
+            PreparedStatement ct = con.prepareStatement("EXEC SPIProduccion ?,?,?,?,?,?,?");
             ct.setString(1, teatro);
             ct.setString(2, obra);
             ct.setString(3, tipo);
             ct.setString(4, detalles);
             ct.setString(5, estado);
+            ct.setDate(6, fechaI);
+            ct.setDate(7, fehcaF);
             ct.executeUpdate();
     
             return true;
