@@ -38,26 +38,39 @@ public class Teatros {
         new LoginFrame();
     }
     
-    public static String Login(String user, String pass){
+    public static void Connect(String user, String pass){
         try {
-          String connectionUrl = "jdbc:sqlserver://;database=TEATROS;";
-          Connection c = DriverManager.getConnection(connectionUrl, user, pass);
-          con = c;
-          System.out.println("Conectado.");
-          User = user;
-          Password = pass;
+            String connectionUrl = "jdbc:sqlserver://;database=TEATROS;";
+            Connection c = DriverManager.getConnection(connectionUrl, user, pass);
+            con = c;
+            System.out.println("Conectado.");
+            User = user;
+            Password = pass;
+            System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo + "\n" + Teatro);
         } 
         catch (SQLException ex) 
         {
             System.err.println(ex.toString());
-            return null;
 
         }
-        String tipo = getTipo(user);
-        Tipo = tipo;
+    }
+    
+    public static String Login(String user, String pass){
+        try {
+          String connectionUrl = "jdbc:sqlserver://;database=TEATROS;";
+          Connection c = DriverManager.getConnection(connectionUrl, "Default", "12345");
+          con = c;
+        } 
+        catch (SQLException ex) 
+        {
+            System.err.println(ex.toString());
+
+        }
+        String[] datos = getTipo(user);
+        Tipo = datos[0];
+        Teatro = datos[1];
         
-        System.out.println("User: " + User + "\nPassword: " + Password + "\nTipo: " + Tipo + "\n" + Teatro);
-        return tipo;
+        return datos[0];
     }
     
     public static boolean isNumeric(String cadena) {
@@ -88,21 +101,20 @@ public class Teatros {
     
     
     
-    private static String getTipo(String user){
-        String tipo = null;
+    private static String[] getTipo(String user){
+        String[] datos = null;
         try{
             PreparedStatement ct = con.prepareStatement("EXEC SPStipoLogin ?");
             ct.setString(1, user);
             ResultSet rs = ct.executeQuery();
             
             if(rs.next()){
-                tipo = rs.getString(1);
-                Teatro = rs.getString(2);
+                datos = new String[]{rs.getString(1), rs.getString(2)};
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
         }
-        return tipo;
+        return datos;
     }
     
     public static boolean checkEmpleado(JFrame p, String cedula, String telCelular, String correo, String usuario){

@@ -171,18 +171,21 @@ public class LoginFrame extends javax.swing.JFrame {
 
     private void TActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TActionPerformed
         Teatros.Login("aperez", "ova4Che");
+        Teatros.Connect("LoginAdmin", "AdminLog");
         new AdminTeatro();
         this.dispose();
     }//GEN-LAST:event_TActionPerformed
 
     private void SActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SActionPerformed
         Teatros.Login("aconejo", "Con4Use");
+        Teatros.Connect("LoginSis", "SistemLog");
         new AdminSistema();
         this.dispose();
     }//GEN-LAST:event_SActionPerformed
 
     private void AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AActionPerformed
         Teatros.Login("jramos", "Efacha2");
+        Teatros.Connect("LoginAgent", "AgenteLog");
         new Agente();
         this.dispose();
     }//GEN-LAST:event_AActionPerformed
@@ -197,10 +200,13 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrecta", "Advertencia",0);
             return;
         }else if("AdminSis".equals(tipo)){
+            Teatros.Connect("LoginSis", "SistemLog");
             new AdminSistema();
         }else if("AdminTeatro".equals(tipo)){
+            Teatros.Connect("LoginAdmin", "AdminLog");
             new AdminTeatro();
         }else if("Agente".equals(tipo)){
+            Teatros.Connect("LoginAgent", "AgenteLog");
             new Agente();
         }
             this.dispose();
