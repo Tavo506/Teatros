@@ -181,7 +181,7 @@ public class Asientos extends javax.swing.JFrame {
                     Random pato = new Random();
                     Agente.InsertarAsientos(teatro, titulo, bloque, fila, fecha, hora , Integer.parseInt(numeros.get(i).toString()), IP, cantidad, pato.nextInt(900000)+100000, monto);
                 }
-                usados = "Todo gud";
+                usados = "Compra exitosa";
                 }
             JOptionPane.showMessageDialog(this, usados, "Informacion",1);
             

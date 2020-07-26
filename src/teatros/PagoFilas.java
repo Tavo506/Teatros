@@ -69,6 +69,7 @@ public class PagoFilas extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         CVVField = new javax.swing.JTextField();
+        efectivo = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -133,8 +134,17 @@ public class PagoFilas extends javax.swing.JFrame {
         CVVField.setText("CVV");
         getContentPane().add(CVVField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 50, -1));
 
+        efectivo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        efectivo.setText("Pagar ?");
+        efectivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                efectivoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(efectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, -1, -1));
+
         jButton1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButton1.setText("Pagar 💸");
+        jButton1.setText("Pagar ?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -195,6 +205,22 @@ public class PagoFilas extends javax.swing.JFrame {
         CostoField.setText(Integer.toString(cantidad*precio));
     }//GEN-LAST:event_CantidadSpinnerStateChanged
 
+    private void efectivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_efectivoActionPerformed
+        try{
+                int cantidadCompra = Integer.parseInt(CantidadSpinner.getValue().toString());
+                int cantidadDisponible = Integer.parseInt(TablaFilas.getValueAt(TablaFilas.getSelectedRow(), 1).toString());
+                int numReg = aleatorio.nextInt(1000000);
+                if(cantidadCompra>cantidadDisponible){
+                    JOptionPane.showMessageDialog(this, "Asientos insuficientes", "Faltan asientos",0);
+                }
+                else{
+                    InetAddress inetAddress = InetAddress. getLocalHost();
+                   new Asientos(Integer.parseInt(CantidadSpinner.getValue().toString()), numReg, Bloque, teatro, titulo,TablaFilas.getValueAt(TablaFilas.getSelectedRow(),0).toString(), inetAddress.getHostAddress(), Integer.parseInt(CostoField.getText()), TablaFilas.getValueAt(TablaFilas.getSelectedRow(),2).toString());
+            } }catch (UnknownHostException ex) {
+                Logger.getLogger(PagoFilas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_efectivoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +264,7 @@ public class PagoFilas extends javax.swing.JFrame {
     private javax.swing.JTable TablaFilas;
     private javax.swing.JTextField TarjetaNumField;
     private javax.swing.JLabel TituloPago;
+    private javax.swing.JButton efectivo;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
