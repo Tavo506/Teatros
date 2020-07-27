@@ -160,24 +160,29 @@ public class PagoFilas extends javax.swing.JFrame {
         
         
         try{
-            long tarjetanum = Long.parseLong(TarjetaNumField.getText());
+            int monto = Integer.parseInt(CostoField.getText());
             int CVVnum = Integer.parseInt(CVVField.getText());
+            long tarjetanum = Long.parseLong(TarjetaNumField.getText());
+            
+            if(Integer.toString(CVVnum).length() != 3){
+                JOptionPane.showMessageDialog(this, "Código CVV inválido", "Advertencia",0);
+                return;
+            }
+            if(Long.toString(CVVnum).length() != 16){
+                JOptionPane.showMessageDialog(this, "Número de tarjeta inválido", "Advertencia",0);
+                return;
+            }
+                
             try{
                 Integer.parseInt(CVVField.getText());
                 
                 int cantidadCompra = Integer.parseInt(CantidadSpinner.getValue().toString());
                 int cantidadDisponible = Integer.parseInt(TablaFilas.getValueAt(TablaFilas.getSelectedRow(), 1).toString());
-                if(tarjetanum%3==1){
-                    JOptionPane.showMessageDialog(this, "El numero de tarjeta es incorreco y no pudo ser encontrado", "Tarjeta incorrecta",0);
-                }
-                else if(tarjetanum%3==2){
-                    JOptionPane.showMessageDialog(this, "La cuenta se encuentra expirada por favor contactar al banco proveedor de su servicio", "Tarjeta expirada o cancelada",0);
-                }
-                else if(tarjetanum%3!=CVVnum%3){
-                    JOptionPane.showMessageDialog(this, "Codigo de seguridad en tarjeta incorrecto", "Codigo incorrecto",0);
+                if(monto%2 == CVVnum%2){
+                    JOptionPane.showMessageDialog(this, "Tarjeta rechazada", "Aviso",0);
                 }
                 else if(cantidadCompra>cantidadDisponible){
-                    JOptionPane.showMessageDialog(this, "Hijole creo que no se va a poder", "Faltan asientos",0);
+                    JOptionPane.showMessageDialog(this, "Cantidad de asientos insuficientes", "Faltan asientos",0);
                 }
                 else{
                     
