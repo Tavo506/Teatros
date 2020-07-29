@@ -168,7 +168,7 @@ public class PagoFilas extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Código CVV inválido", "Advertencia",0);
                 return;
             }
-            if(Long.toString(CVVnum).length() != 16){
+            if(Long.toString(tarjetanum).length() != 16){
                 JOptionPane.showMessageDialog(this, "Número de tarjeta inválido", "Advertencia",0);
                 return;
             }

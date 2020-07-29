@@ -5,6 +5,10 @@
  */
 package teatros;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Admin
@@ -128,6 +132,11 @@ public class AdminTeatro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+        try {
+            Teatros.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminTeatro.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed

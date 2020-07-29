@@ -134,7 +134,11 @@ public class Cartelera extends javax.swing.JFrame {
         int pos = TablaCartelera.getSelectedRow();
         String NombreObra = TablaCartelera.getValueAt(pos, 0).toString();
         String Teatro = TablaCartelera.getValueAt(pos, 1).toString();
-        new Bloques(NombreObra, Teatro);
+        String tempIni = AnnoIni.getValue().toString()+ "-" + MesIni.getValue().toString()+"-"+ DiaIni.getValue().toString();
+        String tempFinal = AnnoFinal.getValue().toString()+ "-" + MesFinal.getValue().toString()+"-"+ DiaFinal.getValue().toString();
+        Date Ini = Date.valueOf(tempIni);
+        Date Final = Date.valueOf(tempFinal);
+        new Bloques(NombreObra, Teatro, Ini, Final);
     }//GEN-LAST:event_BotonConfirmarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

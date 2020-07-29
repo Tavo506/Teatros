@@ -143,11 +143,11 @@ public class IncluirProdu extends javax.swing.JFrame {
         jPanel1.add(bCrearProdu, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 580, 360, 100));
 
         cEstado.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        cEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Confidencial", "Adelantada", "Anunciada", "Abierta" }));
+        cEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "confidencial", "adelantada", "anunciada", "abierta" }));
         jPanel1.add(cEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 190, 40));
 
         cTipo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        cTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Danza", "Música", "Teatro", "Otros" }));
+        cTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "danza", "música", "teatro", "otros" }));
         jPanel1.add(cTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, 190, 40));
 
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N

@@ -11,6 +11,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -106,6 +108,11 @@ public class Agente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+        try {
+            Teatros.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Agente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed
@@ -116,9 +123,10 @@ public class Agente extends javax.swing.JFrame {
 
      public static void VerCartelera(Date Ini, Date Fin, DefaultTableModel Tabla)throws SQLException{
             try{
-                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPSobras ?, ?");
+                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPSobras ?, ?, ?");
                 ct.setDate(1, Ini);
                 ct.setDate(2, Fin);
+                ct.setString(3, Teatros.Teatro);
                 ResultSet rs = ct.executeQuery();
                 Tabla.setRowCount(0);
                 while(rs.next()){
@@ -133,11 +141,13 @@ public class Agente extends javax.swing.JFrame {
             }    
         }
         
-        public static void VerPresentaciones(String ObraNombre, String Teatro, DefaultTableModel Tabla)throws SQLException{
+         public static void VerPresentaciones(String ObraNombre, String Teatro, DefaultTableModel Tabla, Date Ini, Date Fin)throws SQLException{
             try{
-                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPSpresentacion ?, ?");
+                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPSpresentacion ?, ?, ?, ?");
                 ct.setString(1, ObraNombre);
                 ct.setString(2, Teatro);
+                ct.setDate(3, Ini);
+                ct.setDate(4, Fin);
                 ResultSet rs = ct.executeQuery();
                 while(rs.next()){
                     Tabla.addRow(new Object[]{rs.getString(1) + "    -    " + rs.getString(2), rs.getString(3), rs.getString(4)});

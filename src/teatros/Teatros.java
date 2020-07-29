@@ -66,9 +66,10 @@ public class Teatros {
             System.err.println(ex.toString());
 
         }
-        String[] datos = getTipo(user);
-        Tipo = datos[0];
-        Teatro = datos[1];
+        String[] datos = checkUser(user, pass);
+
+        if(datos == null)
+            return null;
         
         return datos[0];
     }
@@ -101,15 +102,18 @@ public class Teatros {
     
     
     
-    private static String[] getTipo(String user){
+    private static String[] checkUser(String user, String pass){
         String[] datos = null;
         try{
-            PreparedStatement ct = con.prepareStatement("EXEC SPStipoLogin ?");
+            PreparedStatement ct = con.prepareStatement("EXEC SPStipoLogin ?, ?");
             ct.setString(1, user);
+            ct.setString(2, pass);
             ResultSet rs = ct.executeQuery();
             
             if(rs.next()){
                 datos = new String[]{rs.getString(1), rs.getString(2)};
+                Tipo = datos[0];
+                Teatro = datos[1];
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());

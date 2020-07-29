@@ -212,10 +212,10 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Confidencial"/>
-                <StringItem index="1" value="Adelantada"/>
-                <StringItem index="2" value="Anunciada"/>
-                <StringItem index="3" value="Abierta"/>
+                <StringItem index="0" value="confidencial"/>
+                <StringItem index="1" value="adelantada"/>
+                <StringItem index="2" value="anunciada"/>
+                <StringItem index="3" value="abierta"/>
               </StringArray>
             </Property>
           </Properties>
@@ -235,10 +235,10 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
-                <StringItem index="0" value="Danza"/>
-                <StringItem index="1" value="M&#xfa;sica"/>
-                <StringItem index="2" value="Teatro"/>
-                <StringItem index="3" value="Otros"/>
+                <StringItem index="0" value="danza"/>
+                <StringItem index="1" value="m&#xfa;sica"/>
+                <StringItem index="2" value="teatro"/>
+                <StringItem index="3" value="otros"/>
               </StringArray>
             </Property>
           </Properties>

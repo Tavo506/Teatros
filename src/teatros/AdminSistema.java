@@ -5,6 +5,10 @@
  */
 package teatros;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Admin
@@ -41,7 +45,6 @@ public class AdminSistema extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador del Sistema");
-        setMaximumSize(new java.awt.Dimension(900, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -109,6 +112,11 @@ public class AdminSistema extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
+        try {
+            Teatros.con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminSistema.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
         new LoginFrame();
     }//GEN-LAST:event_CerrarActionPerformed

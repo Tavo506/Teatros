@@ -5,6 +5,7 @@
  */
 package teatros;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +27,11 @@ public class Bloques extends javax.swing.JFrame {
      * Creates new form Bloques
      */
     private String teatro;
-    public Bloques(String ObraName, String Teatro) {
+    public Bloques(String ObraName, String Teatro, Date Ini, Date Fin) {
         this.teatro = Teatro;
         initComponents();
         Titulo.setText(ObraName);
-        CargaBloques(ObraName, Teatro);
+        CargaBloques(ObraName, Teatro, Ini, Fin);
         
         
         
@@ -136,14 +137,14 @@ public class Bloques extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Bloques(ObraName, Teatro).setVisible(true);
+                new Bloques(ObraName, Teatro, null, null).setVisible(true);
             }
         });
     }
-    public void CargaBloques(String ObraName, String Teatro){
+    public void CargaBloques(String ObraName, String Teatro, Date Ini, Date Fin){
     DefaultTableModel modelo = (DefaultTableModel) TablaBloques.getModel();
         try {
-            Agente.VerPresentaciones(ObraName, Teatro, modelo);
+            Agente.VerPresentaciones(ObraName, Teatro, modelo, Ini, Fin);
             
             TableRowSorter<TableModel> sorter = new TableRowSorter<>(modelo);
             TablaBloques.setRowSorter(sorter);
