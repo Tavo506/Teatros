@@ -114,9 +114,9 @@ public class PagoFilas extends javax.swing.JFrame {
         jLabel2.setText("Costo:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, -1, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "19", "20", "21", "22", "23", "24", "25" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "19", "20", "21", "22", "23", "24", "25", "26", "27" }));
         jComboBox1.setToolTipText("");
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, 60, -1));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 330, 60, -1));
 
         TarjetaNumField.setText("Digite un numero de tarjeta");
         getContentPane().add(TarjetaNumField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 300, -1));
@@ -125,11 +125,11 @@ public class PagoFilas extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, -1, -1));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" }));
-        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 80, -1));
+        getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 80, -1));
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel4.setText("/");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 322, 20, 40));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 320, 20, 40));
 
         CVVField.setText("CVV");
         getContentPane().add(CVVField, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 50, -1));
