@@ -178,9 +178,10 @@ public class Asientos extends javax.swing.JFrame {
             }
             if("".equals(usados)){
                 for(int i =0; i<cantidad; i++){
-                    Random pato = new Random();
-                    Agente.InsertarAsientos(teatro, titulo, bloque, fila, fecha, hora , Integer.parseInt(numeros.get(i).toString()), IP, cantidad, pato.nextInt(900000)+100000, monto);
+                    Agente.InsertarAsientos(teatro, titulo, bloque, fila, fecha, hora , Integer.parseInt(numeros.get(i).toString()));
                 }
+                Random pato = new Random();
+                Agente.InsertarRegistro(IP, pato.nextInt(900000)+100000, cantidad ,titulo, teatro, monto, hora, fecha);
                 usados = "Compra exitosa";
                 }
             JOptionPane.showMessageDialog(this, usados, "Informacion",1);

@@ -54,29 +54,35 @@ public class Cartelera extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TablaCartelera.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         TablaCartelera.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Produccion", "Teatro"
+                "Produccion", "Teatro", "Descripcion", "Tipo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        TablaCartelera.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         TablaCartelera.setRowHeight(45);
         TablaCartelera.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(TablaCartelera);
         if (TablaCartelera.getColumnModel().getColumnCount() > 0) {
             TablaCartelera.getColumnModel().getColumn(0).setResizable(false);
+            TablaCartelera.getColumnModel().getColumn(0).setPreferredWidth(80);
             TablaCartelera.getColumnModel().getColumn(1).setResizable(false);
+            TablaCartelera.getColumnModel().getColumn(1).setPreferredWidth(80);
+            TablaCartelera.getColumnModel().getColumn(2).setResizable(false);
+            TablaCartelera.getColumnModel().getColumn(2).setPreferredWidth(300);
+            TablaCartelera.getColumnModel().getColumn(3).setResizable(false);
+            TablaCartelera.getColumnModel().getColumn(3).setPreferredWidth(5);
         }
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 740, 400));
@@ -181,6 +187,8 @@ public class Cartelera extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Cartelera.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

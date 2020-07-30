@@ -132,7 +132,7 @@ public class Agente extends javax.swing.JFrame {
                 while(rs.next()){
                     if("confidencial".equals(rs.getString(3))) {
                     } else{
-                    Tabla.addRow(new Object[]{rs.getString(1), rs.getString(2)});
+                    Tabla.addRow(new Object[]{rs.getString(1), rs.getString(2), rs.getString(4), rs.getString(5)});
                     }
 
                 }
@@ -223,9 +223,9 @@ public class Agente extends javax.swing.JFrame {
         return "";
         }
         
-        public static void InsertarAsientos(String teatro, String produ, String bloque, String fila, String fecha, String hora, int numasiento, String IP, int cantidad, int numreg, int monto){
+        public static void InsertarAsientos(String teatro, String produ, String bloque, String fila, String fecha, String hora, int numasiento){
         try{
-                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPIasientos ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPIasientos ?, ?, ?, ?, ?, ?, ?");
                 ct.setString(1, teatro);
                 ct.setString(2, produ);
                 ct.setString(3, bloque);
@@ -233,10 +233,24 @@ public class Agente extends javax.swing.JFrame {
                 ct.setString(5, fecha);
                 ct.setString(6, hora);
                 ct.setInt(7, numasiento);
-                ct.setString(8, IP);
-                ct.setInt(9, cantidad);
-                ct.setInt(10, numreg);
-                ct.setInt(11, monto);
+                ct.executeUpdate();
+
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        public static void InsertarRegistro(String IP,int numreg,int cantidad,String produ,String teatro,   int monto, String hora, String fecha){
+        try{
+                PreparedStatement ct = Teatros.con.prepareStatement("EXEC SPIregistro ?, ?, ?, ?, ?, ?, ?, ?");
+                ct.setString(1, IP);
+                ct.setInt(2, numreg);
+                ct.setInt(3, cantidad);
+                ct.setString(4, produ);
+                ct.setString(5, teatro);
+                ct.setInt(6, monto);
+                ct.setString(7, hora);
+                ct.setString(8, fecha);
                 ct.executeUpdate();
 
             }catch(SQLException e){
