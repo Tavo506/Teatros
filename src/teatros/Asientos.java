@@ -171,10 +171,7 @@ public class Asientos extends javax.swing.JFrame {
         
         for(int i =0; i<cantidad; i++){
             numeros.add(Integer.parseInt(Spinners.get(i).getValue().toString()));
-            usados = Agente.BuscaAsiento(teatro, titulo, bloque, fila, fecha, hora, numeros.get(i));
-            if(!"".equals(usados)){
-                break;
-                }
+            usados = usados + ", " + Agente.BuscaAsiento(teatro, titulo, bloque, fila, fecha, hora, numeros.get(i));
             }
             if("".equals(usados)){
                 for(int i =0; i<cantidad; i++){
