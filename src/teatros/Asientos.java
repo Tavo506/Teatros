@@ -170,8 +170,12 @@ public class Asientos extends javax.swing.JFrame {
         String usados = "";
         
         for(int i =0; i<cantidad; i++){
+            String aux;
             numeros.add(Integer.parseInt(Spinners.get(i).getValue().toString()));
-            usados = usados + ", " + Agente.BuscaAsiento(teatro, titulo, bloque, fila, fecha, hora, numeros.get(i));
+            aux = Agente.BuscaAsiento(teatro, titulo, bloque, fila, fecha, hora, numeros.get(i));
+            if(!"".equals(aux)){
+                usados = usados + ", " + aux;
+                }
             }
             if("".equals(usados)){
                 for(int i =0; i<cantidad; i++){
@@ -181,8 +185,8 @@ public class Asientos extends javax.swing.JFrame {
                 Agente.InsertarRegistro(IP, pato.nextInt(900000)+100000, cantidad ,titulo, teatro, monto, hora, fecha);
                 usados = "Compra exitosa";
                 }
-            JOptionPane.showMessageDialog(this, usados, "Informacion",1);
-            
+            if("Compra exitosa".equals(usados)){JOptionPane.showMessageDialog(this, usados, "Informacion",1);}else{
+            JOptionPane.showMessageDialog(this, "Los asientos usados son: "+usados, "Informacion",1);}  
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     /**
