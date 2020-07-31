@@ -52,9 +52,9 @@ public class LoginFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        T = new javax.swing.JButton();
-        A = new javax.swing.JButton();
         S = new javax.swing.JButton();
+        A = new javax.swing.JButton();
+        T = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         Password = new javax.swing.JPasswordField();
         User = new javax.swing.JTextField();
@@ -67,19 +67,12 @@ public class LoginFrame extends javax.swing.JFrame {
         BotonLogin = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login Teatros");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        T.setText("T");
-        T.addActionListener(new java.awt.event.ActionListener() {
+        S.setText("S");
+        S.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TActionPerformed(evt);
+                SActionPerformed(evt);
             }
         });
-        getContentPane().add(T, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, -1, -1));
 
         A.setText("A");
         A.addActionListener(new java.awt.event.ActionListener() {
@@ -87,15 +80,19 @@ public class LoginFrame extends javax.swing.JFrame {
                 AActionPerformed(evt);
             }
         });
-        getContentPane().add(A, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, -1, -1));
 
-        S.setText("S");
-        S.addActionListener(new java.awt.event.ActionListener() {
+        T.setText("T");
+        T.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SActionPerformed(evt);
+                TActionPerformed(evt);
             }
         });
-        getContentPane().add(S, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, -1, -1));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login Teatros");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(41, 40, 40));
         jPanel1.setOpaque(false);
